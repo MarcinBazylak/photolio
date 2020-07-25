@@ -17,11 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/{username}', function($username) {
-//    $user = Users::where('username', $username)->firstOrFail();
-//    print_r($user);
-// });
-
 Route::get('/{username}', 'GalleryController@index');
 
 Route::get('/{username}/o-mnie', 'GalleryController@aboutMe');

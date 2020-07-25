@@ -8,8 +8,8 @@
 
 body {
     font-family: "KoHo", cursive;
-    overflow-y: scroll;
     margin: 0;
+    overflow-x: hidden;
 }
 
 @keyframes header {
