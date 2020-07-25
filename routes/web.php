@@ -17,6 +17,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::get('/{username}', function($username) {
+//    $user = Users::where('username', $username)->firstOrFail();
+//    print_r($user);
+// });
+
+Route::get('/{username}', 'GalleryController@index');
+
+Route::get('/{username}/o-mnie', 'GalleryController@aboutMe');
+
+Route::get('/{username}/kontakt', 'GalleryController@contact');
+
+Route::get('/{username}/album-{album}', 'GalleryController@album');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

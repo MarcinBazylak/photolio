@@ -1,0 +1,221 @@
+@import url("https://fonts.googleapis.com/css?family=KoHo&display=swap");
+
+* {
+    box-sizing: border-box;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+body {
+    font-family: "KoHo", cursive;
+    overflow-y: scroll;
+    margin: 0;
+}
+
+@keyframes header {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+header h1 {
+    color: white;
+    font-size: 4rem;
+    margin: 50px 0 0 0;
+    font-weight: 100;
+    opacity: 0;
+    text-align: center;
+    animation-name: header;
+    animation-duration: 0.3s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+@keyframes background {
+    0% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+header {
+    opacity: 0.3;
+    width: 98%;
+    height: auto;
+    min-height: 70vh;
+    margin: 1%;
+    background-color: #333;
+    background-image: url("/../img/top.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    justify-items: center;
+    animation-name: background;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+header p {
+    font-size: 18px;
+    font-weight: 100;
+    text-align: justify;
+}
+
+header a {
+    color: greenyellow;
+    text-decoration: none;
+}
+
+.my-description {
+    height: 80%;
+    width: 60%;
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    opacity: 0;
+    animation-name: header;
+    animation-duration: 0.3s;
+    animation-delay: 0.3s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+@keyframes albums {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.albums {
+    width: 100%;
+    height: 15%;
+    margin-top: 10%;
+    margin-bottom: 40px;
+    text-align: center;
+    opacity: 0;
+    animation-name: albums;
+    animation-duration: 0.3s;
+    animation-delay: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+.albums a {
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 5px 15px 7px 15px;
+    border-radius: 25px;
+    margin: 10px;
+    font-size: 0.9rem;
+}
+
+.albums a:hover {
+    color: greenyellow;
+}
+
+.albums a.on {
+    color: greenyellow;
+    box-shadow: 0 0 10px greenyellow;
+}
+
+img.gallery {
+    max-width: 400px;
+    max-height: 300px;
+    transition-duration: 0.5s;
+    object-fit: contain;
+}
+
+@keyframes gallery {
+    0% {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(-80px);
+        opacity: 1;
+    }
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    max-width: 96%;
+    width: 1200px;
+    margin: 40px auto;
+    opacity: 0;
+    animation-name: gallery;
+    animation-duration: 0.3s;
+    animation-delay: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+.gallery-photo {
+    margin: 15px;
+    height: fit-content;
+    width: fit-content;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 3px 3px 8px 3px rgba(0,0,0,0.2);
+}
+
+.gallery-photo a {
+    letter-spacing: 0;
+    line-height: 0;
+    padding: 0;
+    display: block;
+}
+
+.gallery-photo:hover .gallery-photo-overlay {
+    opacity: 1;
+    bottom: 0px;
+}
+
+.gallery-photo:hover img.gallery {
+    filter: blur(5px);
+}
+
+.gallery-photo-overlay {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    bottom: -10px;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: calc(100% + 20px);
+    color: white;
+    opacity: 0;
+    transition-duration: 0.5s;
+    line-height: normal;
+}
+
+@media only screen and (max-width: 760px) {
+    .my-description {
+        width: 96%;
+    }
+}
