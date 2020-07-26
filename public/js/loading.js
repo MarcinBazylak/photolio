@@ -22,7 +22,7 @@ $(document).scroll(function() {
   $('.gallery-photo').each(function() {
     var t = $(this).offset().top;
 
-    if (y + h - 50 > t) {
+    if (y + h + 160 > t) {
 
       if(!$(this).hasClass('show'))
 

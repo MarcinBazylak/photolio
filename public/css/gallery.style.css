@@ -2,19 +2,27 @@
 
 * {
     box-sizing: border-box;
-    font-size: 16px;
     letter-spacing: 1px;
 }
 
 html {
    position: relative;
-   min-height: 100vh;
+   min-height: 100%;
 }
 
 body {
     font-family: "KoHo", cursive;
+    font-size: 16px;
     margin: 0;
-    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+   flex: 1;
+   overflow: hidden;
+   position: relative;
 }
 
 @keyframes header {
@@ -87,13 +95,13 @@ footer {
    position: absolute;
    bottom: 0;
    text-align: center;
-   width: 100vw;
+   width: 100%;
    padding: 10px;
 }
 
 .my-description {
     height: 80%;
-    width: 60%;
+    width: 60vw;
     color: white;
     text-align: center;
     font-size: 24px;
@@ -248,8 +256,76 @@ img.gallery {
     line-height: normal;
 }
 
+.wrapper {
+   width: 60vw;
+   margin: 100px auto;
+}
+
+.form {
+   width: fit-content;
+   margin: 20px auto;
+}
+
+.contact {
+   font-family: 'KoHo';
+   font-size: 16px;
+   border: 1px solid #333;
+   border-radius: 8px;
+   padding: 6px 15px 8px 15px;
+   background-color: #f6f6f6;
+   margin: 0;
+}
+
+input.contact {
+   width: 300px;
+   margin-bottom: 10px;
+}
+
+input.contact:first-of-type {
+   margin-right: 10px;
+}
+
+textarea.contact {
+   width: 610px;
+   margin-bottom: 5px;
+   min-height: 100px;
+}
+
+#message {
+   padding: 20px;
+   min-height: 65px;
+   text-align: center;
+   font-size: 20px;
+   font-weight: 800;
+   opacity: 0;
+   transition-duration: 1s;
+}
+
+.fade-in {
+   opacity: 1 !important;
+}
+
 @media only screen and (max-width: 760px) {
     .my-description {
         width: 96%;
     }
+
+    .wrapper{
+       width: 96%;
+    }
+
+    .contact {
+       display: block;
+       width: 300px !important;
+       margin: 10px auto !important;
+    }
+
+    button.contact {
+       width: auto !important;
+       margin: initial !important;
+    }
+
+    /* textarea.contact {
+       width: 90%;
+    } */
 }

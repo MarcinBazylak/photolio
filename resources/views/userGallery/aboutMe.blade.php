@@ -1,5 +1,12 @@
 @extends('layouts.gallery')
 
 @section('content')
-O mnie
+
+<div class="wrapper">
+
+   <h2>{{ $aboutMe->title }}</h2>
+   <p style="text-align: justify">{!! nl2br(e($aboutMe->text)) !!}</p>
+
+</div>
+
 @endsection

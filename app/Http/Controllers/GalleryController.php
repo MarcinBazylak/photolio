@@ -43,7 +43,8 @@ class GalleryController extends Controller
 
     public function aboutMe() 
     {
-      return view('userGallery.aboutMe', ['settings' => $this->settings, 'albums' => $this->albums, 'currentAlbum' => 0]);
+      $aboutMe = UserAboutme::where('uid', $this->user->id)->firstOrFail();
+      return view('userGallery.aboutMe', ['settings' => $this->settings, 'albums' => $this->albums, 'currentAlbum' => 0, 'aboutMe' => $aboutMe]);
     }
 
     public function contact() 

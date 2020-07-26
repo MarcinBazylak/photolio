@@ -12,54 +12,60 @@
 </head>
 
 <body>
-   <header>
 
-      <label class="navigation-toggle" id="toggle" for="input-toggle">
-         <span></span>
-         <span></span>
-         <span></span>
-      </label>
-      <input type="checkbox" id="input-toggle">
-      <nav id="nav">
-         <ul>
-            <li id="li1">
-               <a href="/{{ $settings->uname }}" id="aboutMeLink">Galeria</a>
-            </li>
-            <li id="li2">
-               <a href="/{{ $settings->uname }}/o-mnie" id="portfolioLink">O mnie</a>
-            </li>
-            <li id="li3">
-               <a href="/{{ $settings->uname }}/kontakt" id="contactLink">Kontakt</a>
-            </li>
-         </ul>
-      </nav>
+   <div class="container">
 
-      <div class="my-title">
-         <h1>{{ $settings->title }}</h1>
-      </div>
-      <div class="my-description">
-         <p>
-            {!! nl2br(e($settings->welcome_note)) !!} <a href="/{{ $settings->uname }}/kontakt">kontakt</a>
-         </p>
-      </div>
+      <header>
+         <label class="navigation-toggle" id="toggle" for="input-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+         </label>
+         <input type="checkbox" id="input-toggle">
+         <nav id="nav">
+            <ul>
+               <li id="li1">
+                  <a href="/{{ $settings->uname }}" id="aboutMeLink">Galeria</a>
+               </li>
+               <li id="li2">
+                  <a href="/{{ $settings->uname }}/o-mnie" id="portfolioLink">O mnie</a>
+               </li>
+               <li id="li3">
+                  <a href="/{{ $settings->uname }}/kontakt" id="contactLink">Kontakt</a>
+               </li>
+            </ul>
+         </nav>
 
-      <div class="albums">
-         @foreach ($albums as $album)
-         @if ($album->id == $currentAlbum)
-         <a class="on" href="/{{ $settings->uname }}/album-{{ $album->id }}">{{ $album->category_name }}</a>
-         @else
-         <a href="/{{ $settings->uname }}/album-{{ $album->id }}">{{ $album->category_name }}</a>
-         @endif
-         @endforeach
-      </div>
+         <div class="my-title">
+            <h1>{{ $settings->title }}</h1>
+         </div>
+         <div class="my-description">
+            <p>
+               {!! nl2br(e($settings->welcome_note)) !!}... <a href="/{{ $settings->uname }}/o-mnie">więcej</a>
+            </p>
+         </div>
 
-   </header>
+         <div class="albums">
+            @foreach ($albums as $album)
+            @if ($album->id == $currentAlbum)
+            <a class="on" href="/{{ $settings->uname }}/album-{{ $album->id }}">{{ $album->category_name }}</a>
+            @else
+            <a href="/{{ $settings->uname }}/album-{{ $album->id }}">{{ $album->category_name }}</a>
+            @endif
+            @endforeach
+         </div>
 
-   @yield('content')
+      </header>
+
+      @yield('content')
+
+   </div>
 
    <footer>Layout and design: Photolio.pl. All photos by: {{ $settings->title }}. All rights reserved</footer>
 
    <script src="/js/menu.js"></script>
+   <script src="/js/send.js"></script>
+   <script src="/js/message.js"></script>
    <script src="/js/loading.js"></script>
 </body>
 
