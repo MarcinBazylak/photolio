@@ -6,6 +6,11 @@
     letter-spacing: 1px;
 }
 
+html {
+   position: relative;
+   min-height: 100vh;
+}
+
 body {
     font-family: "KoHo", cursive;
     margin: 0;
@@ -78,6 +83,14 @@ header a {
     text-decoration: none;
 }
 
+footer {
+   position: absolute;
+   bottom: 0;
+   text-align: center;
+   width: 100vw;
+   padding: 10px;
+}
+
 .my-description {
     height: 80%;
     width: 60%;
@@ -112,7 +125,7 @@ header a {
     opacity: 0;
     animation-name: albums;
     animation-duration: 0.3s;
-    animation-delay: 1s;
+    animation-delay: 0.8s;
     animation-timing-function: ease;
     animation-fill-mode: forwards;
 }
@@ -172,6 +185,7 @@ img.gallery {
 }
 
 .gallery-photo {
+    opacity: 0;
     margin: 15px;
     height: fit-content;
     width: fit-content;
@@ -179,7 +193,27 @@ img.gallery {
     position: relative;
     overflow: hidden;
     border-radius: 5px;
-    box-shadow: 3px 3px 8px 3px rgba(0,0,0,0.2);
+    box-shadow: 3px 3px 8px 3px rgba(0, 0, 0, 0.2);
+    transform: translateY(40px);
+}
+
+@keyframes show {
+    0% {
+        transform: translateY(40px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.show {
+    animation-name: show;
+    animation-duration: 0.8s;
+    animation-delay: 0.5s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
 }
 
 .gallery-photo a {
