@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserSetting extends Model
+class Photo extends Model
 {
     //
 }

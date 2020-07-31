@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+   return view('welcome');
 });
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 Route::get('/{username}', 'GalleryController@index');
 
@@ -23,8 +27,6 @@ Route::get('/{username}/o-mnie', 'GalleryController@aboutMe');
 
 Route::get('/{username}/kontakt', 'GalleryController@contact');
 
+Route::post('/{username}/kontakt', 'EmailController@sendToUser');
+
 Route::get('/{username}/album-{album}', 'GalleryController@album');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

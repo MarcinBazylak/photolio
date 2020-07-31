@@ -13,3 +13,4 @@ yarn-error.log
 /public/photos
 /public/send.php
 /config/mail.php
+/app/Services/send.php

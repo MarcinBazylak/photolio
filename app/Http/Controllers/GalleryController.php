@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Services\UserService;
-use App\UserAboutme;
-use App\UserPhoto;
-use App\UserCategory;
-use App\UserSetting;
+use App\Aboutme;
+use App\Photo;
+use App\Album;
+use Mail;
 use Illuminate\Support\Facades\Route;
 
 class GalleryController extends Controller
@@ -23,33 +22,32 @@ class GalleryController extends Controller
    public function __construct() {
       $username = Route::current()->parameter('username');
       $this->user = User::where('username', $username)->firstOrFail();
-      $this->settings = UserSetting::where('uid', $this->user->id)->first();
-      $this->albums = UserCategory::where('uid', $this->user->id)->get();
-      $this->currentAlbum = UserCategory::where('id', $this->settings->def_cat)->where('uid', $this->user->id)->firstOrFail();
+      $this->albums = Album::where('user_id', $this->user->id)->orderBy('album_name', 'asc')->get();
+      $this->currentAlbum = Album::where('id', $this->user->def_album)->where('user_id', $this->user->id)->first();
    }
 
     public function index()
     {
-      $this->photos = UserPhoto::where('cat_id', $this->settings->def_cat)->where('active', 1)->get();
-      return view('userGallery.gallery', ['settings' => $this->settings, 'photos' => $this->photos, 'albums' => $this->albums, 'currentAlbum' => $this->currentAlbum->id]);
+      $this->photos = Photo::where('album_id', $this->user->def_album)->get();
+      return view('userGallery.gallery', ['user' => $this->user, 'photos' => $this->photos, 'albums' => $this->albums, 'currentAlbum' => $this->currentAlbum->id]);
     }
 
     public function album($username, $album)
     {
-      $this->currentAlbum = UserCategory::where('id', $album)->where('uid', $this->user->id)->firstOrFail();
-      $this->photos = UserPhoto::where('cat_id', $album)->where('active', 1)->get();
-      return view('userGallery.gallery', ['settings' => $this->settings, 'photos' => $this->photos, 'albums' => $this->albums, 'currentAlbum' => $this->currentAlbum->id]);
+      $this->currentAlbum = Album::where('id', $album)->where('user_id', $this->user->id)->firstOrFail();
+      $this->photos = Photo::where('album_id', $album)->get();
+      return view('userGallery.gallery', ['user' => $this->user, 'photos' => $this->photos, 'albums' => $this->albums, 'currentAlbum' => $this->currentAlbum->id]);
     }
 
     public function aboutMe() 
     {
-      $aboutMe = UserAboutme::where('uid', $this->user->id)->firstOrFail();
-      return view('userGallery.aboutMe', ['settings' => $this->settings, 'albums' => $this->albums, 'currentAlbum' => 0, 'aboutMe' => $aboutMe]);
+      $aboutMe = Aboutme::where('user_id', $this->user->id)->first();
+      return view('userGallery.aboutMe', ['user' => $this->user, 'albums' => $this->albums, 'aboutMe' => $aboutMe]);
     }
 
     public function contact() 
     {
-      return view('userGallery.contact', ['settings' => $this->settings, 'photos' => $this->photos, 'albums' => $this->albums, 'currentAlbum' => 0]);
+      return view('userGallery.contact', ['user' => $this->user, 'albums' => $this->albums]);
     }
 
 }

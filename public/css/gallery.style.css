@@ -305,6 +305,30 @@ textarea.contact {
    opacity: 1 !important;
 }
 
+.green {
+   width: 100%;
+   height: auto;
+   padding: 8px;
+   background-color: #afa;
+   color: black;
+   font-weight: 400;
+}
+
+.social-icons-container {
+   position: absolute;
+   top: 60px;
+   left: 60px;
+   width: fit-content;
+   opacity: 1;
+}
+
+img.social-icon {
+   max-width: 40px;
+   max-height: 40px;
+   margin-right: 10px;
+   border: 0;
+}
+
 @media only screen and (max-width: 760px) {
     .my-description {
         width: 96%;
@@ -325,7 +349,17 @@ textarea.contact {
        margin: initial !important;
     }
 
-    /* textarea.contact {
-       width: 90%;
-    } */
+    .social-icons-container {
+      top: 15px;
+      left: 15px;
+      display: flex;
+      flex-direction: column;
+   }
+
+   img.social-icon {
+      max-width: 30px;
+      max-height: 30px;
+      margin-bottom: 10px;
+   }
+
 }

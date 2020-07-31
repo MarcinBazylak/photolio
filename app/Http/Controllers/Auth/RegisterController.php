@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Aboutme;
+use App\Album;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -41,6 +45,18 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function register(Request $request)
+   {
+      $this->validator($request->all())->validate();
+
+      event(new Registered($user = $this->create($request->all())));
+
+      // $this->guard()->login($user);
+
+      return $this->registered($request, $user)
+                     ?: redirect('/' . $user->username);
+   }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -50,9 +66,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+         'name' => ['required', 'string', 'max:191'],
+         'username' => ['required', 'string', 'max:191', 'unique:users', 'regex:/^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/'],
+         'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
+         'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -62,12 +79,51 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
+
+    private function addAboutMe($user_id, $user_name)
+    {
+       Aboutme::create([
+          'user_id' => $user_id,
+          'title' => $user_name,
+          'description' => 'O mnie'
+       ]);
+    }
+
+    private function addFirstAlbum($user_id)
+    {
+       $album = Album::create([
+         'user_id' => $user_id,
+         'album_name' => 'Krajobraz'
+       ]);
+
+       $album_id = $album->id;
+
+       $this->setDefAlbum($album_id, $user_id);
+    }
+
+    private function setDefAlbum($album_id, $user_id)
+    {
+      $user = User::find($user_id);
+      $user->def_album = $album_id;
+      $user->save();
+    }
+
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $user = User::create([
+         'name' => $data['name'],
+         'username' => $data['username'],
+         'email' => $data['email'],
+         'password' => Hash::make($data['password']),
         ]);
+
+        $id = $user->id;
+        $name = $user->name;
+
+        $this->addAboutMe($id, $name);
+        $this->addFirstAlbum($id);
+
+         return $user;
     }
+
 }

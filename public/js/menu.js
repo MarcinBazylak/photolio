@@ -1,4 +1,4 @@
-$('#toggle').click(function() {
+$('#toggle, #li1, #li2, #li3').click(function() {
 
    toggleMenu();
 
