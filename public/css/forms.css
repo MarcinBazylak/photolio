@@ -1,0 +1,22 @@
+.username-check {
+   width: 300px;
+   max-width: 94%;
+   padding: 10px;
+   border-radius: 8px;
+   border: 1px solid #5680e9;
+   font-weight: 400 !important;
+   color: black !important;
+   margin-bottom: 1.5vh;
+}
+
+button {
+   width: auto !important;
+   padding: 10px 20px !important;
+}
+
+
+@media only screen and (max-width: 760px) {
+   .username-check {
+      margin: 0.5vh auto;
+   }
+}

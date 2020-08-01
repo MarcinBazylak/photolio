@@ -162,6 +162,10 @@ img.gallery {
     max-height: 300px;
     transition-duration: 0.5s;
     object-fit: contain;
+    padding: 10px;
+    border: 1px solid #999;
+    background-color: white;
+    border-radius: 6px;
 }
 
 @keyframes gallery {
@@ -254,6 +258,7 @@ img.gallery {
     opacity: 0;
     transition-duration: 0.5s;
     line-height: normal;
+    padding: 10px;
 }
 
 .wrapper {
