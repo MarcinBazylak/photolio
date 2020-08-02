@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class HomeController extends Controller
 {
     /**
@@ -11,7 +9,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-
+   
     /**
      * Show the application dashboard.
      *
@@ -19,6 +17,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('welcome');
+    }
+
+    public function nameCheck()
+    {
+
+      
+      return view('welcome');
     }
 }

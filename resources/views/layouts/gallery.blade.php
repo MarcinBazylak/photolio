@@ -65,7 +65,7 @@
          <div class="albums">
             @foreach ($albums as $album)
             @php
-            $currAlbum = $currentAlbum ?? '';
+            $currAlbum = $currentAlbum->id ?? '';
             @endphp
             @if ($album->id == $currAlbum)
             <a class="on" href="/{{ $user->username }}/album-{{ $album->id }}">{{ $album->album_name }}</a>

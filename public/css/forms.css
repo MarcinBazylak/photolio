@@ -7,9 +7,10 @@
    font-weight: 400 !important;
    color: black !important;
    margin-bottom: 1.5vh;
+   z-index: initial !important;
 }
 
-button {
+.button {
    width: auto !important;
    padding: 10px 20px !important;
 }

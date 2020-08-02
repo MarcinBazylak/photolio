@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-   return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+
+Route::post('/', 'HomeController@nameCheck');
 
 Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 Route::get('/{username}', 'GalleryController@index');
 

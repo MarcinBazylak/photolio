@@ -38,18 +38,18 @@
 
       </section>
       <section class="section">
-         <p>
-            Wpisz nazwę strony jakiej chciałbyś używać aby sprawdzić czy jest wolna.
-         </p>
-         <p>
-            Możesz używać wielkich oraz małych liter, cyfr oraz znaku podkreślnika.<br>
-            Adres Twojej strony będzie wyglądał następująco:<br>
-         </p>
-         <form action="" method="post">
-            @csrf
-            <input placeholder="https://photolio.pl/twoja_strona" type="text" name="username" class="username-check">
-            <button type="submit" class="username-check button">Sprawdź</button>
-         </form>
+            <p>
+               Wpisz nazwę strony jakiej chciałbyś używać aby sprawdzić czy jest wolna.
+            </p>
+            <p>
+               Możesz używać wielkich oraz małych liter, cyfr oraz znaku podkreślnika.<br>
+               Adres Twojej strony będzie wyglądał następująco:<br>
+            </p>
+            <form action="" method="post">
+               @csrf
+               <input placeholder="https://photolio.pl/twoja_strona" type="text" name="username" class="username-check">
+               <button type="submit" class="username-check button">Sprawdź</button>
+            </form>
       </section>
       <section class="section">
          <h2 class="title">Tutorial 2</h2>
