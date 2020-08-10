@@ -3,12 +3,12 @@
 @section('content')
 
 @if (Auth::check())
-Zdjęcia
-<br>
+<h1>Zdjęcia</h1>
+
 
 @foreach ($albums as $album)
 <div>
-   {{ $album->album_name }}<br>
+   <h2>{{ $album->album_name }}</h2>
    @foreach ($photos as $photo)
    @if ($photo->album_id === $album->id)
    <a href="/photos/{{ Auth::user()->id }}/{{ $photo->id }}.jpg" data-lightbox="{{ $photo->album_name }}" data-title="{{ $photo->title }}">

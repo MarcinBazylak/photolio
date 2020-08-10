@@ -95,7 +95,7 @@ return [
     'password'             => 'Hasło jest nieprawidłowe.',
     'present'              => 'Pole :attribute musi być obecne.',
     'regex'                => 'Format pola :attribute jest nieprawidłowy.',
-    'required'             => 'Pole :attribute jest wymagane.',
+    'required'             => 'Pole ":attribute" nie może być puste.',
     'required_if'          => 'Pole :attribute jest wymagane gdy :other ma wartość :value.',
     'required_unless'      => 'Pole :attribute jest wymagane jeżeli :other nie znajduje się w :values.',
     'required_with'        => 'Pole :attribute jest wymagane gdy :values jest obecny.',

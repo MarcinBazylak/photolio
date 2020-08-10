@@ -27,6 +27,8 @@ Route::get('/panel/photos', 'PhotoController@index');
 
 Route::get('/panel/albums', 'AlbumController@index');
 
+Route::post('/panel/albums', 'AlbumController@store');
+
 // GALLERY
 
 Route::get('/{username}', 'GalleryController@index');

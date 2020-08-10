@@ -11,8 +11,8 @@
    @if (Auth::check())
       <a href="/logout">Wyloguj</a> 
    @else
-      <a href="{{ URL::route('login') }}">Logowanie</a> 
-      <a href="/register">Rejestracja</a> 
+      <a href="{{ URL::route('login') }}">Zaloguj się</a> | 
+      <a href="/register">Załóż konto</a> 
    @endif
    <br>
 
