@@ -23,25 +23,25 @@ class GalleryController extends Controller
     {
       $photos = Photo::where('album_id', $this->user->def_album)->get();
       $currentAlbum = $this->currentAlbum;
-      return view('userGallery.gallery', compact('photos', 'currentAlbum'));
+      return view('gallery.index', compact('photos', 'currentAlbum'));
     }
 
     public function album($username, $album)
     {
       $currentAlbum = Album::where('id', $album)->where('user_id', $this->user->id)->firstOrFail();
       $photos = Photo::where('album_id', $album)->get();     
-      return view('userGallery.gallery', compact('photos', 'currentAlbum'));
+      return view('gallery.index', compact('photos', 'currentAlbum'));
     }
 
     public function aboutMe() 
     {
       $aboutMe = Aboutme::where('user_id', $this->user->id)->first();
-      return view('userGallery.aboutMe', compact('aboutMe'));
+      return view('gallery.aboutMe', compact('aboutMe'));
     }
 
     public function contact() 
     {
-      return view('userGallery.contact');
+      return view('gallery.contact');
     }
 
 }

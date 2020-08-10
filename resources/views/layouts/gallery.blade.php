@@ -21,15 +21,15 @@
          <div class="social-icons-container">
 
             @if (!empty($user->facebook))
-            <a href="{{ $settings->facebook }}">
-               <img class="social-icon" src="/img/facebook.png" alt="facebook icon" traget="_blank">
-            </a> 
+            <a href="{{ $user->facebook }}" target="_blank">
+               <img class="social-icon" src="/img/facebook.png" alt="facebook icon">
+            </a>
             @endif
 
             @if (!empty($user->instagram))
-            <a href="{{ $settings->instagram }}">
-               <img class="social-icon" src="/img/instagram.png" alt="instagram icon" traget="_blank">
-            </a>  
+            <a href="{{ $user->instagram }}" target="_blank">
+               <img class="social-icon" src="/img/instagram.png" alt="instagram icon">
+            </a>
             @endif
 
          </div>
@@ -41,15 +41,23 @@
          <input type="checkbox" id="input-toggle">
          <nav id="nav">
             <ul>
-               <li id="li1">
+               <li class="menu-item">
                   <a href="/{{ $user->username }}" id="aboutMeLink">Galeria</a>
                </li>
-               <li id="li2">
+               <li  class="menu-item">
                   <a href="/{{ $user->username }}/o-mnie" id="portfolioLink">O mnie</a>
                </li>
-               <li id="li3">
+               <li  class="menu-item">
                   <a href="/{{ $user->username }}/kontakt" id="contactLink">Kontakt</a>
                </li>
+               @if (Auth::check() && Auth::user()->id === $user->id)
+               <li  class="menu-item">
+                  <a href="/panel" class="admin" id="contactLink">Panel</a>
+               </li> 
+               <li  class="menu-item">
+                  <a href="/logout" class="admin" id="contactLink">Wyloguj</a>
+               </li> 
+               @endif
             </ul>
          </nav>
 
@@ -88,7 +96,7 @@
    <script>
       lightbox.option({
         'albumLabel': ''
-      })
+      });
    </script>
 </body>
 

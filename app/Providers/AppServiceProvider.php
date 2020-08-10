@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
       Builder::defaultStringLength(191);      
 
-      View::composer('userGallery.*', function ($view) {
+      View::composer('gallery.*', function ($view) {
 
          $user = User::where('username', Route::current()->parameter('username'))->firstOrFail();
          $albums = Album::where('user_id', $user->id)->orderBy('album_name', 'asc')->get();
@@ -40,8 +40,6 @@ class AppServiceProvider extends ServiceProvider
             'albums' => $albums
             ]);
       });
-
-      
 
    }
 

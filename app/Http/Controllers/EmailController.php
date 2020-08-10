@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
 use App\Album;
-use Mail;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 class EmailController extends Controller
 {
    private $user;
-   private $settings;
    private $albums;
 
    public function sendToUser() {
@@ -30,7 +29,7 @@ class EmailController extends Controller
       });
 
       $alert = '<div class="green">Twoja wiadomość została wysłana. Dziękuję.</div>';
-      return view('userGallery.contact', ['user' => $this->user, 'albums' => $this->albums, 'message' => $alert]);
+      return view('gallery.contact', ['user' => $this->user, 'albums' => $this->albums, 'message' => $alert]);
 
     }
 }

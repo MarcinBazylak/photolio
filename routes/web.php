@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Auth::routes(['verify' => true]);
+
 Route::get('/', 'HomeController@index');
 
-Route::post('/', 'HomeController@nameCheck');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Auth::routes(['verify' => true]);
+Route::get('/panel', 'SettingsController@index');
+
+Route::get('/panel/photos', 'PhotoController@index');
+
+Route::get('/panel/albums', 'AlbumController@index');
+
+// GALLERY
 
 Route::get('/{username}', 'GalleryController@index');
 

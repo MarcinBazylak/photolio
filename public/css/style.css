@@ -140,6 +140,10 @@ img.front-image {
     font-size: 3rem;
 }
 
+.is-invalid {
+   border: 1px solid orangered !important;
+}
+
 @media screen and (max-width: 1300px) {
 
    p {

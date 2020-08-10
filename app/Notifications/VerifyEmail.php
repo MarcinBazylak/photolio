@@ -45,7 +45,11 @@ class VerifyEmail extends Notification
 
         return (new MailMessage)
             ->subject(Lang::get('Potwierdź swój adres email'))
-            ->line(Lang::get('Kliknij w poniższy przycisk aby potwierdzić swój adres email.'))
+            ->line(Lang::get('
+            Otrzymujesz tę wiadomośc ponieważ zarejestrowałeś się wserwisie Photolio.pl
+            Aby móc w pełni korzystać z serwisu, musisz potwierdzić swój adres email.
+            Kliknij w poniższy przycisk aby potwierdzić swój adres email.
+            '))
             ->action(Lang::get('Potwierdź adres'), $verificationUrl)
             ->line(Lang::get('Jeśli nie rejestrowałeś się w serwisie Photolio.pl, nie musisz podejmować zadnej akcji.'));
     }
