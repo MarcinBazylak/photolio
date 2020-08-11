@@ -15,16 +15,16 @@ use App\Photo;
       <label for="album_name">Nazwa albumu</label>
    </div>
    <div>
-      <input placeholder="Podaj nazwę albumu" type="text" class="form-control @error('album_name') is-invalid @enderror" name="album_name" id="album_name" autocomplete="off">
-      @error('album_name')
-      <span class="invalid-feedback" role="alert">
+      <input placeholder="Podaj nazwę albumu" type="text" class="form-control @error('album_name') is-invalid @enderror" name="album_name" id="album_name" required autocomplete="off">
+      <span style="display: block; height: 20px" class="invalid-feedback" role="alert">
+         @error('album_name')
          <strong>{{ $message }}</strong>
+         @enderror
       </span>
-      @enderror
    </div>
    <div>
       <button type="submit">Dodaj</button>
-   </div>   
+   </div>
 </form>
 <br>
 
@@ -39,9 +39,9 @@ $count = count(Photo::where('album_id', $album->id)->get());
    <a href="/panel/album/{{ $album->id }}">{{ $album->album_name }} </a> {{ $count }}
    <br>
    <a href="/panel/album/{{ $album->id }}/edit">zmień nazwę</a>
-   @if ($count === 0)
+   {{-- @if ($count === 0) --}}
    | <a href="/panel/album/{{ $album->id }}/delete">usuń</a>
-   @endif
+   {{-- @endif --}}
 </div>
 @endforeach
 

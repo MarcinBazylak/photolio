@@ -27,6 +27,8 @@ Route::get('/panel/photos', 'PhotoController@index');
 
 Route::get('/panel/albums', 'AlbumController@index');
 
+Route::get('/panel/album/{album}/delete', 'AlbumController@destroy');
+
 Route::post('/panel/albums', 'AlbumController@store');
 
 // GALLERY
