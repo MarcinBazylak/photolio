@@ -35,7 +35,6 @@ class AppServiceProvider extends ServiceProvider
 
          $user = User::where('username', Route::current()->parameter('username'))->firstOrFail();
          $albums = Album::where('user_id', $user->id)->orderBy('album_name', 'asc')->get();
-
          $view->with([
             'user' => $user,
             'albums' => $albums
@@ -45,9 +44,16 @@ class AppServiceProvider extends ServiceProvider
       View::composer('user.albums', function ($view) {
 
          $albums = Album::where('user_id', Auth::user()->id)->orderBy('album_name', 'asc')->get();
-
          $view->with([
             'albums' => $albums
+            ]);
+      });
+
+      View::composer('user.*', function ($view) {
+
+         $user = User::find(Auth::user()->id);
+         $view->with([
+            'user' => $user
             ]);
       });
 

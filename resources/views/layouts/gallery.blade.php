@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
    <link rel="stylesheet" href="/css/gallery.style.css">
    <link rel="stylesheet" href="/css/gallery.menu.css">
@@ -12,26 +11,20 @@
    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
    <script src="/js/lightbox.js"></script>
 </head>
-
 <body>
-
    <div class="container">
-
       <header>
          <div class="social-icons-container">
-
             @if(!empty($user->facebook))
                <a href="{{ $user->facebook }}" target="_blank">
                   <img class="social-icon" src="/img/facebook.png" alt="facebook icon">
                </a>
             @endif
-
             @if(!empty($user->instagram))
                <a href="{{ $user->instagram }}" target="_blank">
                   <img class="social-icon" src="/img/instagram.png" alt="instagram icon">
                </a>
             @endif
-
          </div>
          <label class="navigation-toggle" id="toggle" for="input-toggle">
             <span></span>
@@ -60,7 +53,6 @@
                @endif
             </ul>
          </nav>
-
          <div class="my-title">
             <h1>{{ $user->name }}</h1>
          </div>
@@ -69,36 +61,30 @@
                {!! nl2br(e($user->welcome_note)) !!}... <a href="/{{ $user->username }}/o-mnie">więcej</a>
             </p>
          </div>
-
          <div class="albums">
             @foreach($albums as $album)
                @php
                   $currAlbum = $currentAlbum->id ?? '';
                @endphp
-               @if($album->id == $currAlbum)
-                  <a class="on" href="/{{ $user->username }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
-               @else
-                  <a href="/{{ $user->username }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
+               @if($user->settings->empty_albums || $album->photos()->count() > 0)
+                  @if($album->id == $currAlbum)
+                     <a class="on" href="/{{ $user->username }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
+                  @else
+                     <a href="/{{ $user->username }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
+                  @endif
                @endif
             @endforeach
          </div>
-
       </header>
-
       @yield('content')
-
    </div>
-
    <footer>Layout and design: Photolio.pl. All photos by: {{ $user->name }}. All rights reserved</footer>
-
    <script src="/js/menu.js"></script>
    <script src="/js/loading.js"></script>
    <script>
       lightbox.option({
          'albumLabel': ''
       });
-
    </script>
 </body>
-
 </html>
