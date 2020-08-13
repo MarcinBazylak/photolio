@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\User;
 use App\Album;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Database\Schema\Builder;
@@ -37,6 +38,15 @@ class AppServiceProvider extends ServiceProvider
 
          $view->with([
             'user' => $user,
+            'albums' => $albums
+            ]);
+      });
+
+      View::composer('user.albums', function ($view) {
+
+         $albums = Album::where('user_id', Auth::user()->id)->orderBy('album_name', 'asc')->get();
+
+         $view->with([
             'albums' => $albums
             ]);
       });

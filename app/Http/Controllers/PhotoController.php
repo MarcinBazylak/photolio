@@ -18,7 +18,6 @@ class PhotoController extends Controller
    public function index()
    {
       $albums = Album::where('user_id', Auth::user()->id)->orderBy('album_name', 'asc')->get();
-      $photos = Photo::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->get();
-      return view('user.photos', compact('albums', 'photos'));
+      return view('user.photos', compact('albums'));
    }
 }

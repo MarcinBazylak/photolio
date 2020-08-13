@@ -1,0 +1,9 @@
+{
+   "blade.format.enable": true,
+   "beautify.language": {
+      "html": [
+          "blade",
+          "html"
+      ]
+  },
+}

@@ -1,5 +1,5 @@
 @php
-use App\Services\Alert;
+   use App\Services\Alert;
 @endphp
 <!DOCTYPE html>
 <html lang="pl">
@@ -16,20 +16,20 @@ use App\Services\Alert;
 
 <body>
 
-   @if (Auth::check())
-   <a href="/logout">Wyloguj</a> |
-   <a href="/panel">Ustawienia</a> |
-   <a href="/panel/albums">Albumy</a> |
-   <a href="/panel/photos">Zdjęcia</a>
+   @if(Auth::check())
+      <a href="/logout">Wyloguj</a> |
+      <a href="/panel">Ustawienia</a> |
+      <a href="/panel/albums">Albumy</a> |
+      <a href="/panel/photos">Zdjęcia</a>
    @else
-   <a href="{{ URL::route('login') }}">Zaloguj się</a> |
-   <a href="/register">Załóż konto</a>
+      <a href="{{ URL::route('login') }}">Zaloguj się</a> |
+      <a href="/register">Załóż konto</a>
    @endif
    <br>
 
    <div>
-      @if (!empty($alert))
-      {!! Alert::display($alert) !!}
+      @if(session('alert'))
+         {!! Alert::display(session('alert')) !!}
       @endif
    </div>
 
@@ -39,8 +39,9 @@ use App\Services\Alert;
    <script src="/js/loading.js"></script>
    <script>
       lightbox.option({
-        'albumLabel': ''
+         'albumLabel': ''
       });
+
    </script>
 </body>
 

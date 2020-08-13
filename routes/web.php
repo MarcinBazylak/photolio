@@ -21,15 +21,22 @@ Route::get('/', 'HomeController@index');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+
 Route::get('/panel', 'SettingsController@index');
 
 Route::get('/panel/photos', 'PhotoController@index');
 
 Route::get('/panel/albums', 'AlbumController@index');
 
-Route::get('/panel/album/{album}/delete', 'AlbumController@destroy');
+Route::get('/panel/album/{album}/delete', 'AlbumController@delete');
+
+Route::post('/panel/album/{album}/delete', 'AlbumController@destroy');
+
+Route::get('/panel/album/{album}/edit', 'AlbumController@edit');
 
 Route::post('/panel/albums', 'AlbumController@store');
+
+Route::put('/panel/album/{album}/edit', 'AlbumController@update');
 
 // GALLERY
 

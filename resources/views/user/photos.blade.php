@@ -2,27 +2,25 @@
 
 @section('content')
 
-@if (Auth::check())
 <h1>Zdjęcia</h1>
 
+@foreach($albums as $album)
 
-@foreach ($albums as $album)
-<div>
-   <h2>{{ $album->album_name }}</h2>
-   @foreach ($photos as $photo)
-   @if ($photo->album_id === $album->id)
-   <a href="/photos/{{ Auth::user()->id }}/{{ $photo->id }}.jpg" data-lightbox="{{ $photo->album_name }}" data-title="{{ $photo->title }}">
-      <img src="/photos/{{ Auth::user()->id }}/thumbnails/{{ $photo->id }}.jpg" class="gallery" alt="{{ $photo->title }}">
-   </a>
+   @if($album->photos()->count() > 0)
+
+      <div>
+         <h2>{{ $album->album_name }}</h2>
+         @foreach($album->photos()->orderBy('id', 'desc')->get() as $photo)
+            @if($photo->album_id === $album->id)
+               <a href="/photos/{{ $photo->user_id }}/{{ $photo->id }}.jpg" data-lightbox="{{ $photo->album_name }}" data-title="{{ $photo->title }}">
+                  <img src="/photos/{{ $photo->user_id }}/thumbnails/{{ $photo->id }}.jpg" class="gallery" alt="{{ $photo->title }}">
+               </a>
+            @endif
+         @endforeach
+      </div>
+
    @endif
-   @endforeach
-</div>
-@endforeach
 
-<br>
-{{ Auth::user()->username }}<br>
-{{ Auth::user()->name }}<br>
-{{ Auth::user()->email }}<br>
-@endif
+@endforeach
 
 @endsection

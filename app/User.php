@@ -4,7 +4,6 @@ namespace App;
 
 use App\Notifications\VerifyEmail;
 use App\Notifications\PasswordReset;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -25,4 +24,13 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->notify(new VerifyEmail);
     }
 
+    public function photos()
+    {
+    	return $this->hasMany('App\Photo');
+    }
+
+    public function albums()
+    {
+    	return $this->hasMany('App\Album');
+    }
 }

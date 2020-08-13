@@ -86,32 +86,34 @@ class RegisterController extends Controller
     * @return \App\User
     */
 
-   private function addAboutMe($user_id, $user_name)
+   private function addAboutMe($userId, $userName)
    {
       Aboutme::create([
-         'user_id' => $user_id,
-         'title' => $user_name,
+         'user_id' => $userId,
+         'title' => $userName,
          'description' => 'O mnie'
       ]);
    }
 
-   private function addFirstAlbum($user_id)
+   private function addFirstAlbum($userId)
    {
       $album = Album::create([
-         'user_id' => $user_id,
+         'user_id' => $userId,
          'album_name' => 'Krajobraz'
       ]);
 
-      $album_id = $album->id;
+      $albumId = $album->id;
 
-      $this->setDefAlbum($album_id, $user_id);
+      $this->setDefAlbum($albumId, $userId);
    }
 
-   private function setDefAlbum($album_id, $user_id)
+   private function setDefAlbum($albumId, $userId)
    {
-      $user = User::find($user_id);
-      $user->def_album = $album_id;
+      $user = User::find($userId);
+      $user->def_album = $albumId;
       $user->save();
+
+      $user->update(['def_album' => $albumId]);
    }
 
    protected function create(array $data)

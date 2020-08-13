@@ -20,16 +20,16 @@
       <header>
          <div class="social-icons-container">
 
-            @if (!empty($user->facebook))
-            <a href="{{ $user->facebook }}" target="_blank">
-               <img class="social-icon" src="/img/facebook.png" alt="facebook icon">
-            </a>
+            @if(!empty($user->facebook))
+               <a href="{{ $user->facebook }}" target="_blank">
+                  <img class="social-icon" src="/img/facebook.png" alt="facebook icon">
+               </a>
             @endif
 
-            @if (!empty($user->instagram))
-            <a href="{{ $user->instagram }}" target="_blank">
-               <img class="social-icon" src="/img/instagram.png" alt="instagram icon">
-            </a>
+            @if(!empty($user->instagram))
+               <a href="{{ $user->instagram }}" target="_blank">
+                  <img class="social-icon" src="/img/instagram.png" alt="instagram icon">
+               </a>
             @endif
 
          </div>
@@ -44,19 +44,19 @@
                <li class="menu-item">
                   <a href="/{{ $user->username }}" id="aboutMeLink">Galeria</a>
                </li>
-               <li  class="menu-item">
+               <li class="menu-item">
                   <a href="/{{ $user->username }}/o-mnie" id="portfolioLink">O mnie</a>
                </li>
-               <li  class="menu-item">
+               <li class="menu-item">
                   <a href="/{{ $user->username }}/kontakt" id="contactLink">Kontakt</a>
                </li>
-               @if (Auth::check() && Auth::user()->id === $user->id)
-               <li  class="menu-item">
-                  <a href="/panel" class="admin" id="contactLink">Panel</a>
-               </li> 
-               <li  class="menu-item">
-                  <a href="/logout" class="admin" id="contactLink">Wyloguj</a>
-               </li> 
+               @if(Auth::check() && Auth::user()->id === $user->id)
+                  <li class="menu-item">
+                     <a href="/panel" class="admin" id="contactLink">Panel</a>
+                  </li>
+                  <li class="menu-item">
+                     <a href="/logout" class="admin" id="contactLink">Wyloguj</a>
+                  </li>
                @endif
             </ul>
          </nav>
@@ -71,15 +71,15 @@
          </div>
 
          <div class="albums">
-            @foreach ($albums as $album)
-            @php
-            $currAlbum = $currentAlbum->id ?? '';
-            @endphp
-            @if ($album->id == $currAlbum)
-            <a class="on" href="/{{ $user->username }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
-            @else
-            <a href="/{{ $user->username }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
-            @endif
+            @foreach($albums as $album)
+               @php
+                  $currAlbum = $currentAlbum->id ?? '';
+               @endphp
+               @if($album->id == $currAlbum)
+                  <a class="on" href="/{{ $user->username }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
+               @else
+                  <a href="/{{ $user->username }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
+               @endif
             @endforeach
          </div>
 
@@ -95,8 +95,9 @@
    <script src="/js/loading.js"></script>
    <script>
       lightbox.option({
-        'albumLabel': ''
+         'albumLabel': ''
       });
+
    </script>
 </body>
 

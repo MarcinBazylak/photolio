@@ -2,8 +2,8 @@
 
 @section('content')
 
-@if (Auth::check())
-    Jsteś zalogowany
+@if(Auth::check())
+   Jsteś zalogowany
 @endif
 
 @endsection
