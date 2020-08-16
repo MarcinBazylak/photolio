@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
    <link rel="stylesheet" href="/css/gallery.style.css">
    <link rel="stylesheet" href="/css/gallery.menu.css">
@@ -11,20 +12,26 @@
    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
    <script src="/js/lightbox.js"></script>
 </head>
+
 <body>
    <div class="container">
       <header>
          <div class="social-icons-container">
-            @if(!empty($user->facebook))
-               <a href="{{ $user->facebook }}" target="_blank">
+            @if(!empty($user->settings->facebook))
+               <a href="{{ $user->settings->facebook }}" target="_blank">
                   <img class="social-icon" src="/img/facebook.png" alt="facebook icon">
                </a>
             @endif
-            @if(!empty($user->instagram))
-               <a href="{{ $user->instagram }}" target="_blank">
+            @if(!empty($user->settings->instagram))
+               <a href="{{ $user->settings->instagram }}" target="_blank">
                   <img class="social-icon" src="/img/instagram.png" alt="instagram icon">
                </a>
             @endif
+            @if(!empty($user->settings->youtube))
+            <a href="{{ $user->settings->youtube }}" target="_blank">
+               <img class="social-icon" src="/img/youtube.png" alt="youtube icon">
+            </a>
+         @endif
          </div>
          <label class="navigation-toggle" id="toggle" for="input-toggle">
             <span></span>
@@ -58,7 +65,7 @@
          </div>
          <div class="my-description">
             <p>
-               {!! nl2br(e($user->welcome_note)) !!}... <a href="/{{ $user->username }}/o-mnie">więcej</a>
+               {!! nl2br(e($user->settings->welcome_note)) !!}... <a href="/{{ $user->username }}/o-mnie">więcej</a>
             </p>
          </div>
          <div class="albums">
@@ -85,6 +92,8 @@
       lightbox.option({
          'albumLabel': ''
       });
+
    </script>
 </body>
+
 </html>

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Notifications\Messages\MailMessage;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +15,23 @@ use Illuminate\Support\Facades\Redirect;
 |
 */
 
+Route::get('/mail', function (){
+   return new MailMessage();
+});
+
 Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+//PANEL
 
 Route::get('/panel', 'SettingsController@index');
+
+Route::put('/panel/settings', 'SettingsController@update');
+
+Route::put('/panel/aboutme', 'SettingsController@aboutMe');
 
 Route::get('/panel/photos', 'PhotoController@index');
 

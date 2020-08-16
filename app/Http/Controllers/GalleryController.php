@@ -14,34 +14,34 @@ class GalleryController extends Controller
    private $user;
    private $currentAlbum;
 
-   public function __construct() {
+   public function __construct()
+   {
       $this->user = User::where('username', Route::current()->parameter('username'))->firstOrFail();
-      $this->currentAlbum = Album::where('id', $this->user->def_album)->where('user_id', $this->user->id)->first();
+      $this->currentAlbum = Album::where('user_id', $this->user->id)->find($this->user->settings->def_album);
    }
 
-    public function index()
-    {
-      $photos = Photo::where('album_id', $this->user->def_album)->get();
+   public function index()
+   {
       $currentAlbum = $this->currentAlbum;
+      $photos = Photo::where('album_id', $this->user->settings->def_album)->get();
       return view('gallery.index', compact('photos', 'currentAlbum'));
-    }
+   }
 
-    public function album($username, $album)
-    {
-      $currentAlbum = Album::where('id', $album)->where('user_id', $this->user->id)->firstOrFail();
-      $photos = Photo::where('album_id', $album)->get();     
+   public function album($username, $album)
+   {
+      $currentAlbum = Album::where('user_id', $this->user->id)->findOrFail($album);
+      $photos = Photo::where('album_id', $album)->get();
       return view('gallery.index', compact('photos', 'currentAlbum'));
-    }
+   }
 
-    public function aboutMe() 
-    {
+   public function aboutMe()
+   {
       $aboutMe = Aboutme::where('user_id', $this->user->id)->first();
       return view('gallery.aboutMe', compact('aboutMe'));
-    }
+   }
 
-    public function contact() 
-    {
+   public function contact()
+   {
       return view('gallery.contact');
-    }
-
+   }
 }

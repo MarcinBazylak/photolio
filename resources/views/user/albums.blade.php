@@ -1,6 +1,3 @@
-@php
-   use App\Photo;
-@endphp
 @extends('layouts.panel')
 
 @section('content')
@@ -30,10 +27,14 @@
 
    @foreach($albums as $album)
       <div>
-         <a href="/panel/album/{{ $album->id }}">{{ $album->album_name }} </a> {{ $album->photos()->count() }}
+         <a href="/panel/album/{{ $album->id }}">{{ $album->album_name }}</a>
+         @if($album->id === $user->settings->def_album)
+            (domyślny)
+         @endif
+         {{ $album->photos()->count() }}
          <br>
          <a href="/panel/album/{{ $album->id }}/edit">zmień nazwę</a>
-         @if($album->photos()->count() === 0)
+         @if($album->photos()->count() === 0 && $user->settings->def_album != $album->id)
             | <a href="/panel/album/{{ $album->id }}/delete">usuń</a>
          @endif
       </div>

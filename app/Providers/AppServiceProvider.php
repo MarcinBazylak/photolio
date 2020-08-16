@@ -41,19 +41,13 @@ class AppServiceProvider extends ServiceProvider
             ]);
       });
 
-      View::composer('user.albums', function ($view) {
-
-         $albums = Album::where('user_id', Auth::user()->id)->orderBy('album_name', 'asc')->get();
-         $view->with([
-            'albums' => $albums
-            ]);
-      });
-
       View::composer('user.*', function ($view) {
 
+         $albums = Album::where('user_id', Auth::user()->id)->orderBy('album_name', 'asc')->get();
          $user = User::find(Auth::user()->id);
          $view->with([
-            'user' => $user
+            'user' => $user,
+            'albums' => $albums
             ]);
       });
 

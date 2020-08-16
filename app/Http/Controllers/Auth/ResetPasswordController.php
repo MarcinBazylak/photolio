@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
@@ -26,5 +25,21 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+   //  'token' => 'required',
+   //  'email' => 'required|email',
+   //  'password' => 'required|confirmed|min:8',
+
+    protected function validationErrorMessages()
+    {
+        return [
+         'token.required' => 'Nieprawidłowy token',
+         'email.required' => 'Pole Adres email jest obowiązkowe',
+         'email.email' => 'Adres email musi posiadać prawidłowy format',
+         'password.required' => 'Pole Hasło jest obowiązkowe',
+         'password.confirmed' => 'Hasła muszą być jednakowe',
+         'password.min' => 'Hasło musi składać się conajmniej z ośmiu znaków'
+        ];
+    }
+
+    protected $redirectTo = '/panel';
 }

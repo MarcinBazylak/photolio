@@ -158,8 +158,8 @@ footer {
 }
 
 img.gallery {
-    max-width: 400px;
-    max-height: 300px;
+    max-width: 350px;
+    max-height: 260px;
     transition-duration: 0.5s;
     object-fit: contain;
     padding: 10px;
@@ -345,7 +345,7 @@ img.social-icon {
     }
 
     .wrapper {
-        width: 96%;
+        width: 94%;
     }
 
     .gallery {

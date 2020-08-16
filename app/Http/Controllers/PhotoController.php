@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Album;
 use App\Http\Controllers\Controller;
-use App\Photo;
-use Illuminate\Support\Facades\Auth;
 
 class PhotoController extends Controller
 {
@@ -17,7 +14,6 @@ class PhotoController extends Controller
 
    public function index()
    {
-      $albums = Album::where('user_id', Auth::user()->id)->orderBy('album_name', 'asc')->get();
-      return view('user.photos', compact('albums'));
+      return view('user.photos');
    }
 }

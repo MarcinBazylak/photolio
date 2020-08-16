@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
-use App\Aboutme;
 use App\Album;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use App\Aboutme;
+use App\UserSetting;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -88,32 +89,26 @@ class RegisterController extends Controller
 
    private function addAboutMe($userId, $userName)
    {
-      Aboutme::create([
-         'user_id' => $userId,
-         'title' => $userName,
-         'description' => 'O mnie'
-      ]);
+      $aboutMe = new Aboutme(['title' => $userName]);
+      $user = User::find($userId);
+      $user->aboutme()->save($aboutMe);
    }
 
    private function addFirstAlbum($userId)
    {
-      $album = Album::create([
-         'user_id' => $userId,
-         'album_name' => 'Krajobraz'
-      ]);
+      $album = new Album(['album_name' => 'Krajobraz']);
+      $user = User::find($userId);
+      $user->albums()->save($album);
 
       $albumId = $album->id;
-
-      $this->setDefAlbum($albumId, $userId);
+      $this->addUserSettings($userId, $albumId);
    }
 
-   private function setDefAlbum($albumId, $userId)
+   private function addUserSettings($userId, $defAlbumId)
    {
+      $userSettings = new UserSetting(['def_album' => $defAlbumId]);
       $user = User::find($userId);
-      $user->def_album = $albumId;
-      $user->save();
-
-      $user->update(['def_album' => $albumId]);
+      $user->settings()->save($userSettings);
    }
 
    protected function create(array $data)

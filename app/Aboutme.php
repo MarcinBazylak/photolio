@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Aboutme extends Model
 {
-   protected $fillable = ['user_id', 'title', 'description'];
+   protected $fillable = ['title'];
+
+   public function user()
+   {
+      return $this->belongsTo('App\User');
+   }
 }
