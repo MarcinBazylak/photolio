@@ -22,8 +22,8 @@ class LoginController extends Controller
          $this->username() => 'required|string',
          'password' => 'required|string',
       ], [], [
-         'email' => 'adres e-mail',
-         'password' => 'hasło'
+         'email' => 'Adres e-mail',
+         'password' => 'Hasło'
       ]);
    }
 

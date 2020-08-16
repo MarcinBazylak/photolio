@@ -73,10 +73,10 @@ class RegisterController extends Controller
          'password' => ['required', 'string', 'min:8', 'confirmed'],
          'terms-accepted' => ['required', 'integer']
       ], [], [
-         'name' => 'imię i nazwisko',
-         'username' => 'nazwa użytkownika',
-         'email' => 'adres e-mail',
-         'password' => 'hasło'
+         'name' => 'Imię i nazwisko',
+         'username' => 'Nazwa użytkownika',
+         'email' => 'Adres e-mail',
+         'password' => 'Hasło'
       ]);
    }
 
