@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Album;
-use App\Photo;
+use App\Services\Albums\CreateAlbum;
+use App\Services\Albums\DeleteAlbum;
+use App\Services\Albums\UpdateAlbum;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AlbumController extends Controller
@@ -20,77 +22,33 @@ class AlbumController extends Controller
       return view('user.albums');
    }
 
-   public function store()
+   public function store(Request $request)
    {
-
-      request()->validate(
-         [
-            'album_name' => 'required|string|max:30|unique:albums,album_name,NULL,id,user_id,' . Auth::user()->id
-         ],
-         [
-            'album_name.unique' => 'Już posiadasz album o nazwie "' . request('album_name') . '"'
-         ],
-         [
-            'album_name' => 'Nazwa albumu'
-         ]
-      );
-
-      $album = new Album();
-      $album->album_name = request('album_name');
-      $album->user_id = Auth::user()->id;
-      $album->save();
-
-      $alert = 'Album "' . request('album_name') . '" został dodany';
-      return redirect('/panel/albums')->with('status', $alert);
+      $result = new CreateAlbum($request);
+      return redirect('/panel/albums')->with('status', $result->alert);
    }
 
-   public function delete($album)
+   public function delete($albumId)
    {
-      $album = Album::where('user_id', Auth::user()->id)->findOrFail($album);
+      $album = Album::where('user_id', Auth::user()->id)->findOrFail($albumId);
       return view('user.deleteAlbum', compact('album'));
    }
 
-   public function destroy($album)
+   public function destroy($albumId)
    {
-
-      $album = Album::where('user_id', Auth::user()->id)->findOrFail($album);
-      $user = User::find(Auth::user()->id);
-
-      if ($album->photos()->count() === 0 && $user->settings->def_album != $album->id) {
-         $alert = 'Album "' . $album->album_name . '" został usunięty';
-         $album->delete();
-      } else {
-         $alert = 'Nie można usunąć albumu "' . $album->album_name . '".';
-      }
-
-      return redirect('/panel/albums')->with('status', $alert);
+      $result = new DeleteAlbum($albumId);
+      return redirect('/panel/albums')->with('status', $result->alert);
    }
 
-   public function edit($album)
+   public function edit($albumId)
    {
-      $album = Album::where('user_id', Auth::user()->id)->findOrFail($album);
+      $album = Album::where('user_id', Auth::user()->id)->findOrFail($albumId);
       return view('user.editAlbum', compact('album'));
    }
 
-   public function update($album)
+   public function update($albumId, Request $request)
    {
-      request()->validate(
-         [
-            'album_name' => 'required|string|max:30|unique:albums,album_name,NULL,id,user_id,' . Auth::user()->id
-         ],
-         [
-            'album_name.unique' => 'Już posiadasz album o nazwie "' . request('album_name') . '".'
-         ],
-         [
-            'album_name' => 'Nazwa albumu'
-         ]
-      );
-
-      $album = Album::where('user_id', Auth::user()->id)->findOrFail($album);
-      $alert = 'Nazwa albumu "' . $album->album_name . '" została zmieniona na "' . request('album_name') . '".';
-      $album->update(['album_name' => request('album_name')]);
-      $album->photos()->update(['album_name' => request('album_name')]);
-
-      return redirect('/panel/albums')->with('status', $alert);
+      $result = new UpdateAlbum($albumId, $request);
+      return redirect('/panel/albums')->with('status', $result->alert);
    }
 }

@@ -6,29 +6,30 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePhotosTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('photos', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
-            $table->integer('album_id');
-            $table->string('title');
-            $table->timestamps();
-        });
-    }
+   /**
+    * Run the migrations.
+    *
+    * @return void
+    */
+   public function up()
+   {
+      Schema::create('photos', function (Blueprint $table) {
+         $table->id();
+         $table->foreignId('user_id')->unsigned();
+         $table->foreignId('album_id')->unsigned();
+         $table->string('album_name');
+         $table->string('title');
+         $table->timestamps();
+      });
+   }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('photos');
-    }
+   /**
+    * Reverse the migrations.
+    *
+    * @return void
+    */
+   public function down()
+   {
+      Schema::dropIfExists('photos');
+   }
 }

@@ -31,15 +31,6 @@ function toggleMenu() {
          t += 0.05;
        });
 
-
-      // $("#li1").removeClass('navclose').addClass('navopen');
-      // setTimeout(function(){
-      //    $("#li2").removeClass('navclose').addClass('navopen');
-      // },100);
-      // setTimeout(function(){
-      //    $("#li3").removeClass('navclose').addClass('navopen');    
-      // },200);
-
    }
 
 }

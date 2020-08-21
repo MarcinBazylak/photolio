@@ -61,21 +61,19 @@
    </div>
 
    <div>
-      <input id="terms-accepted" type="checkbox" class="@error('terms-accepted') is-invalid @enderror" style="display: inline-block !important; width: 45px !important" name="terms-accepted" value="1">
+      <input id="terms-accepted" type="checkbox" name="terms-accepted" value="1">
       Potwierdzam, że zapoznałem się z <a href="/regulamin">regulaminem</a> i akceptuję jego warunki.
       <span class="feedback">
          @error('terms-accepted')
-            <strong><br>Musisz zaakceptować regulamin.</strong>
+            <strong>Musisz zaakceptować regulamin.</strong>
          @enderror
       </span>
    </div>
 
    <div>
-      <div>
-         <button type="submit" class="btn btn-primary">
+         <button type="submit">
             {{ __('Register') }}
          </button>
-      </div>
    </div>
 </form>
 @endsection

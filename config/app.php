@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://photolio'),
+    'url' => env('APP_URL', 'http://photolio.pl'),
 
     'asset_url' => env('ASSET_URL', null),
 

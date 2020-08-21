@@ -8,9 +8,12 @@ use App\Aboutme;
 use App\UserSetting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -111,6 +114,14 @@ class RegisterController extends Controller
       $user->settings()->save($userSettings);
    }
 
+   private function createUserFolders($user_id)
+   {
+      File::makeDirectory(base_path() . '/public/photos/' . $user_id);
+      File::makeDirectory(base_path() . '/public/photos/' . $user_id . '/thumbnails');
+      File::makeDirectory(base_path() . '/public/photos/' . $user_id . '/header');
+      Image::make(base_path() . '/public/img/top.jpg')->save(base_path() . '/public/photos/' . $user_id . '/header/header.jpg');
+   }
+
    protected function create(array $data)
    {
       $user = User::create([
@@ -126,6 +137,7 @@ class RegisterController extends Controller
 
       $this->addAboutMe($id, $name);
       $this->addFirstAlbum($id);
+      $this->createUserFolders($id);
 
       return $user;
    }

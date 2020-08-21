@@ -11,6 +11,11 @@
    <title>{{ $user->name }} :: Photolio</title>
    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
    <script src="/js/lightbox.js"></script>
+   <style>
+      header {
+         background-image: url("/../photos/{{ $user->id }}/header/header.jpg");
+      }
+   </style>
 </head>
 
 <body>
@@ -42,15 +47,15 @@
          <nav id="nav">
             <ul>
                <li class="menu-item">
-                  <a href="/{{ $user->username }}" id="aboutMeLink">Galeria</a>
+                  <a href="http://{{ $user->username }}.{{ Config::get('app.url') }}" id="aboutMeLink">Galeria</a>
                </li>
                <li class="menu-item">
-                  <a href="/{{ $user->username }}/o-mnie" id="portfolioLink">O mnie</a>
+                  <a href="http://{{ $user->username }}.{{ Config::get('app.url') }}/o-mnie" id="portfolioLink">O mnie</a>
                </li>
                <li class="menu-item">
-                  <a href="/{{ $user->username }}/kontakt" id="contactLink">Kontakt</a>
+                  <a href="http://{{ $user->username }}.{{ Config::get('app.url') }}/kontakt" id="contactLink">Kontakt</a>
                </li>
-               @if(Auth::check() && Auth::user()->id === $user->id)
+               @if(Auth::check('verified') && Auth::user()->id === $user->id)
                   <li class="menu-item">
                      <a href="/panel" class="admin" id="contactLink">Panel</a>
                   </li>
@@ -65,7 +70,7 @@
          </div>
          <div class="my-description">
             <p>
-               {!! nl2br(e($user->settings->welcome_note)) !!}... <a href="/{{ $user->username }}/o-mnie">więcej</a>
+               {!! nl2br(e($user->settings->welcome_note)) !!}... <a href="http://{{ $user->username }}.{{ Config::get('app.url') }}/o-mnie">więcej</a>
             </p>
          </div>
          <div class="albums">
@@ -75,9 +80,9 @@
                @endphp
                @if($user->settings->empty_albums || $album->photos()->count() > 0)
                   @if($album->id == $currAlbum)
-                     <a class="on" href="/{{ $user->username }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
+                     <a class="on" href="http://{{ $user->username }}.{{ Config::get('app.url') }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
                   @else
-                     <a href="/{{ $user->username }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
+                     <a href="http://{{ $user->username }}.{{ Config::get('app.url') }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
                   @endif
                @endif
             @endforeach
