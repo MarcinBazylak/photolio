@@ -7,6 +7,7 @@ use App\Services\Photos\AddPhotos;
 use App\Http\Controllers\Controller;
 use App\Photo;
 use App\Services\Photos\AddTitles;
+use App\Services\Photos\ChangeAlbum;
 use App\Services\Photos\DeletePhoto;
 
 class PhotoController extends Controller
@@ -34,9 +35,10 @@ class PhotoController extends Controller
       return redirect('/panel/photos')->with('status', $result->alert);
    }
 
-   public function edit()
+   public function changeAlbum($photoId, Request $request)
    {
-      return redirect('/panel/photos');
+      $result = new ChangeAlbum($photoId, $request);
+      return redirect('/panel/photos')->with('status', $result->alert);
    }
 
    public function update()

@@ -64,11 +64,11 @@
                   </div>
                   <div style="display: block">
                      <input type="hidden" name="photo[{{ $i }}]" value="{{ $result->uploaded[$i] }}">
-                     <input type="text" name="title[{{ $i }}]" placeholder="Wpisz tytuł" autocomplete="off">
+                     <input type="text" name="title[{{ $i }}]" placeholder="Wpisz tytuł zdjęcia" autocomplete="off">
                   </div>
                </div>
             @endfor
-            <button type="submit">Zapisz</button>
+            <button type="submit">Zapisz</button> <a href="/panel/photos"><button type="button">Pomiń</button></a>
          </form>
       </div>
    @endif
@@ -85,11 +85,12 @@
                      <a href="/photos/{{ $photo->user_id }}/{{ $photo->id }}.jpg" data-lightbox="{{ $photo->album_name }}" data-title="{{ $photo->title }}">
                         <img src="/photos/{{ $photo->user_id }}/thumbnails/{{ $photo->id }}.jpg" alt="{{ $photo->title }}" class="gallery">
                         <div class="gallery-photo-overlay">
-                           <strong>{{ $photo->title }}</strong>
+                           {{ $photo->title ?? 'Album: ' . $photo->album_name }}
                         </div>
                      </a>
                      <div class="image-buttons">
-                        <img id="edit-button" class="photo-icon" onclick="showEditPrompt('{{ $photo->user_id }}','{{ $photo->id }}','{{ $photo->title }}')" src="/img/edit.png" alt="edytuj tytuł zdjęcia">
+                        <img id="edit-button" class="photo-icon" onclick="showEditPrompt('{{ $photo->id }}','{{ $photo->title }}')" src="/img/edit.png" alt="edytuj tytuł zdjęcia">
+                        <img id="move-button" class="photo-icon" onclick="showMovePrompt('{{ $photo->id }}','{{ $photo->album_id }}')" src="/img/move.png" alt="przenieś do albumu">
                         <img id="delete-button" class="photo-icon" onclick="showDelPrompt('{{ $photo->user_id }}','{{ $photo->id }}')" src="/img/delete.png" alt="usuń zdjęcie">
                      </div>
                   </div>

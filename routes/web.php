@@ -51,6 +51,8 @@ Route::get('/panel/photo/{photo}/delete', 'PhotoController@destroy');
 
 Route::post('/panel/photo/{photo}/edit', 'PhotoController@update');
 
+Route::post('/panel/photo/{photo}/changeAlbum', 'PhotoController@changeAlbum');
+
 // albums
 
 Route::get('/panel/albums', 'AlbumController@index');

@@ -10,9 +10,6 @@ setTimeout(() => {
          $(this).css("animation-delay", s + "s");
          $(this).addClass("show");
          s += 0.1;
-         console.log("inner height = " + h);
-         console.log("scroll top = " + y);
-         console.log("offset = " + t);
       }
    });
 
