@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Services\Photos\AddPhotos;
 use App\Http\Controllers\Controller;
+use App\Photo;
+use App\Services\Photos\AddTitles;
+use App\Services\Photos\DeletePhoto;
 
 class PhotoController extends Controller
 {
@@ -17,19 +22,16 @@ class PhotoController extends Controller
       return view('user.photos');
    }
 
-   public function store()
+   public function store(Request $request)
    {
-      return redirect('/panel/photos');
+      $result = new AddPhotos($request);
+      return view('user.photos', ['result' => $result, 'status' => $result->alert]);
    }
 
-   public function delete()
+   public function destroy($photoId)
    {
-      return redirect('/panel/photos');
-   }
-
-   public function destroy()
-   {
-      return redirect('/panel/photos');
+      $result = new DeletePhoto($photoId);
+      return redirect('/panel/photos')->with('status', $result->alert);
    }
 
    public function edit()
@@ -40,5 +42,11 @@ class PhotoController extends Controller
    public function update()
    {
       return redirect('/panel/photos');
+   }
+
+   public function addTitles(Request $request)
+   {
+      $result = new AddTitles($request);
+      return redirect('/panel/photos')->with('status', $result->alert);
    }
 }

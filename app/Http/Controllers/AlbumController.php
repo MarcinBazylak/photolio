@@ -30,7 +30,9 @@ class AlbumController extends Controller
 
    public function delete($albumId)
    {
-      $album = Album::where('user_id', Auth::user()->id)->findOrFail($albumId);
+      $album = Album::where('user_id', Auth::user()->id)->find($albumId);
+      if (!$album) abort(403, 'Brak autoryzacji.');
+      
       return view('user.deleteAlbum', compact('album'));
    }
 

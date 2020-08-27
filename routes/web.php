@@ -37,7 +37,7 @@ Route::put('/panel/settings', 'SettingsController@updateUserSettings');
 
 Route::put('/panel/aboutme', 'SettingsController@updateAboutMe');
 
-Route::post('/panel/header', 'SettingsController@updateHeaderPhoto');
+Route::post('/panel/header', 'SettingsController@updateHeaderImage');
 
 // PHOTOS
 
@@ -45,13 +45,11 @@ Route::get('/panel/photos', 'PhotoController@index');
 
 Route::post('/panel/photos', 'PhotoController@store');
 
-Route::get('/panel/photo/{photo}/delete', 'PhotoController@delete');
+Route::put('/panel/photos', 'PhotoController@addTitles');
 
-Route::post('/panel/photo/{photo}/delete', 'PhotoController@destroy');
+Route::get('/panel/photo/{photo}/delete', 'PhotoController@destroy');
 
-Route::get('/panel/photo/{photo}/edit', 'PhotoController@edit');
-
-Route::put('/panel/photo/{photo}/edit', 'PhotoController@update');
+Route::post('/panel/photo/{photo}/edit', 'PhotoController@update');
 
 // albums
 

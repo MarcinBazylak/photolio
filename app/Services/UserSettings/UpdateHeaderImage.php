@@ -30,7 +30,7 @@ class UpdateHeaderImage
       $img->resize(1920, null, function ($constraint) {
          $constraint->aspectRatio();
       });
-      $img->save(base_path() . '/public/photos/' . Auth::user()->id . '/header/header.jpg');
+      $img->save(public_path('photos/' . Auth::user()->id . '/header/header.jpg'));
       $this->alert = 'Zdjęcie zostało pomyślnie zapisane.';
    }
 }

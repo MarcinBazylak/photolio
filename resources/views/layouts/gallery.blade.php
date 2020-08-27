@@ -2,15 +2,15 @@
 <html lang="pl">
 
 <head>
-   <link rel="stylesheet" href="/css/gallery.style.css">
-   <link rel="stylesheet" href="/css/gallery.menu.css">
-   <link rel="stylesheet" href="/css/lightbox.css">
+   <link rel="stylesheet" href="{{ asset('/css/gallery.style.css') }}">
+   <link rel="stylesheet" href="{{ asset('/css/gallery.menu.css') }}">
+   <link rel="stylesheet" href="{{ asset('/css/lightbox.css') }}">
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>{{ $user->name }} :: Photolio</title>
    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-   <script src="/js/lightbox.js"></script>
+   <script src="{{ asset('/js/lightbox.js') }}"></script>
    <style>
       header {
          background-image: url("/../photos/{{ $user->id }}/header/header.jpg");
@@ -57,10 +57,10 @@
                </li>
                @if(Auth::check('verified') && Auth::user()->id === $user->id)
                   <li class="menu-item">
-                     <a href="/panel" class="admin" id="contactLink">Panel</a>
+                     <a href="http://{{ Config::get('app.url') }}/panel" class="admin" id="contactLink">Panel</a>
                   </li>
                   <li class="menu-item">
-                     <a href="/logout" class="admin" id="contactLink">Wyloguj</a>
+                     <a href="http://{{ Config::get('app.url') }}/logout" class="admin" id="contactLink">Wyloguj</a>
                   </li>
                @endif
             </ul>
@@ -91,8 +91,8 @@
       @yield('content')
    </div>
    <footer>Layout and design: Photolio.pl. All photos by: {{ $user->name }}. All rights reserved</footer>
-   <script src="/js/menu.js"></script>
-   <script src="/js/loading.js"></script>
+   <script src="{{ asset('/js/menu.js') }}"></script>
+   <script src="{{ asset('/js/loading.js') }}"></script>
    <script>
       lightbox.option({
          'albumLabel': ''

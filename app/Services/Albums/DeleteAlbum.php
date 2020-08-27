@@ -14,7 +14,8 @@ class DeleteAlbum
 
    public function __construct($albumId)
    {
-      $album = Album::where('user_id', Auth::user()->id)->findOrFail($albumId);
+      $album = Album::where('user_id', Auth::user()->id)->find($albumId);
+      if (!$album) abort(403, 'Brak autoryzacji.');
 
       $this->successful = 'Album "' . $album->album_name . '" został usunięty';
       $this->failed = 'Nie można usunąć albumu "' . $album->album_name . '", ponieważ ';
