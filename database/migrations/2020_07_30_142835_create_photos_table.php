@@ -18,7 +18,7 @@ class CreatePhotosTable extends Migration
          $table->foreignId('user_id')->unsigned();
          $table->foreignId('album_id')->unsigned();
          $table->string('album_name');
-         $table->string('title');
+         $table->string('title')->nullable();
          $table->timestamps();
       });
    }

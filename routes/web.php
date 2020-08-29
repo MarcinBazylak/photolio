@@ -49,7 +49,15 @@ Route::put('/panel/photos', 'PhotoController@addTitles');
 
 Route::get('/panel/photo/{photo}/delete', 'PhotoController@destroy');
 
+Route::get('/panel/photo/{photo}/edit', function () {
+   return redirect('/panel/photos');
+});
+
 Route::post('/panel/photo/{photo}/edit', 'PhotoController@update');
+
+Route::get('/panel/photo/{photo}/changeAlbum', function () {
+   return redirect('/panel/photos');
+});
 
 Route::post('/panel/photo/{photo}/changeAlbum', 'PhotoController@changeAlbum');
 

@@ -78,14 +78,14 @@
    @foreach($albums as $album)
       @if($album->photos()->count() > 0)
          <h3>{{ $album->album_name }}</h3>
-         <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center">
+         <div style="display: flex; flex-wrap: wrap; align-items: center">
             @foreach($album->photos()->orderBy('id', 'desc')->get() as $photo)
                @if($photo->album_id === $album->id)
                   <div class="gallery-photo">
                      <a href="/photos/{{ $photo->user_id }}/{{ $photo->id }}.jpg" data-lightbox="{{ $photo->album_name }}" data-title="{{ $photo->title }}">
                         <img src="/photos/{{ $photo->user_id }}/thumbnails/{{ $photo->id }}.jpg" alt="{{ $photo->title }}" class="gallery">
                         <div class="gallery-photo-overlay">
-                           {{ $photo->title ?? 'Album: ' . $photo->album_name }}
+                           {{ $photo->title }} <br> {{ 'Album: ' . $photo->album_name }}
                         </div>
                      </a>
                      <div class="image-buttons">
@@ -103,3 +103,51 @@
 <div class="screen-overlay"></div>
 
 @endsection
+   <script>
+      function showEditPrompt(photoId, title) {
+         var text =
+            '<div style="text-align: center; height: auto; min-width: 30vw; border: 1px solid white; border-radius: 10px; padding: 15px; color: white">' +
+            '<img src="/photos/{{ Auth::user()->id }}/thumbnails/' +
+            photoId +
+            '.jpg" class="gallery">' +
+            "<p>Podaj nowy tytuł dla tego zdjęcia.</p>" +
+            '<form action="/panel/photo/' +
+            photoId +
+            '/edit" method="POST">' +
+            '<input class="edit-title" type="text" name="title" autocomplete="off" value="' +
+            title +
+            '" autofocus>' +
+            '@csrf' +
+            '<br>' +
+            '<button onclick="hidePrompt()" type="button">ANULUJ</button> <button type="submit">ZAPISZ</button>' +
+            "</form" +
+            "</div>";
+         $(".screen-overlay").append(text).css("display", "flex").animate({
+            opacity: 1,
+         }, "fast");
+      }
+
+      function showMovePrompt(photoId, albumId) {
+         var text =
+            '<div style="text-align: center; height: auto; min-width: 30vw; border: 1px solid white; border-radius: 10px; padding: 15px; color: white">' +
+            '<img src="/photos/{{ Auth::user()->id }}/thumbnails/' + photoId + '.jpg" class="gallery">' +
+            "<p>Wybierz nowy album dla tego zdjęcia.</p>" +
+            '<form action="/panel/photo/' +
+            photoId +
+            '/changeAlbum" method="POST">' +
+            '@csrf' +
+            '<select name="album" style="width: 300px; margin: 10px; background: none; color: #888; padding: 10px; border: 1px solid white; border-radius: 8px">' +
+            '<option value="" disabled selected>Wybierz Album</option>' +
+            '@foreach($albums as $album)' +
+            '<option value="{{ $album->id }}">{{ $album->album_name }}</option>' +
+            '@endforeach' +
+            '</select>' +
+            '<br>' +
+            '<button onclick="hidePrompt()" type="button">ANULUJ</button> <button type="submit">ZAPISZ</button>' +
+            "</form" +
+            "</div>";
+         $(".screen-overlay").append(text).css("display", "flex").animate({
+            opacity: 1,
+         }, "fast");
+      }
+   </script>

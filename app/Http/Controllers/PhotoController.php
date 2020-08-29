@@ -9,6 +9,7 @@ use App\Photo;
 use App\Services\Photos\AddTitles;
 use App\Services\Photos\ChangeAlbum;
 use App\Services\Photos\DeletePhoto;
+use App\Services\Photos\EditTitle;
 
 class PhotoController extends Controller
 {
@@ -41,9 +42,10 @@ class PhotoController extends Controller
       return redirect('/panel/photos')->with('status', $result->alert);
    }
 
-   public function update()
+   public function update($photoId, request $request)
    {
-      return redirect('/panel/photos');
+      $result = new EditTitle($photoId, $request);
+      return redirect('/panel/photos')->with('status', $result->alert);
    }
 
    public function addTitles(Request $request)

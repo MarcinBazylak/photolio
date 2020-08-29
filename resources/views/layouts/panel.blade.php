@@ -17,20 +17,28 @@
 
 <body>
 
-   @if(Auth::check())
+   @auth
       <a href="/logout">Wyloguj</a> |
       <a href="/panel">Ustawienia</a> |
       <a href="/panel/albums">Albumy</a> |
       <a href="/panel/photos">Zdjęcia</a>
-   @else
+   @endauth
+   @if(Auth::user()->is_admin)
+      | <a href="/admin">Admin</a>
+      | <a href="/admin/users">Użytkownicy</a>
+   @endif
+   @guest
       <a href="{{ URL::route('login') }}">Zaloguj się</a> |
       <a href="/register">Załóż konto</a>
-   @endif
+   @endguest
    <br>
 
-   <div style="height:20px">
-      {!! Alert::display($status ?? session('status') ?? '') !!}
-   </div>
+   @if(session('status') !== null || !isset($status))
+      <div class="alert">
+         {!! Alert::display($status ?? session('status')) !!}
+      </div>
+   @endif
+
 
    @yield('content')
 
@@ -43,53 +51,6 @@
    <script src="{{ asset('/js/menu.js') }}"></script>
    <script src="{{ asset('/js/loading.js') }}"></script>
    <script src="{{ asset('/js/delete-photo.js') }}"></script>
-   <script>
-      function showEditPrompt(photoId, title) {
-         var text =
-            '<div style="text-align: center; height: auto; min-width: 30vw; border: 1px solid white; border-radius: 10px; padding: 15px; color: white">' +
-            '<img src="/photos/{{ Auth::user()->id }}/thumbnails/' +
-            photoId +
-            '.jpg" class="gallery">' +
-            "<p>Podaj nowy tytuł dla tego zdjęcia.</p>" +
-            '<form action="/panel/photo/' +
-            photoId +
-            '/edit" method="POST">' +
-            '<input class="edit-title" type="text" name="title" autocomplete="off" value="' +
-            title +
-            '">' +
-            '@csrf' +
-            '<br>' +
-            '<button onclick="hidePrompt()" type="button">ANULUJ</button> <button type="submit">ZAPISZ</button>' +
-            "</form" +
-            "</div>";
-         $(".screen-overlay").append(text).css("display", "flex").animate({
-            opacity: 1,
-         }, "fast");
-      }
-
-      function showMovePrompt(photoId, albumId) {
-         var text =
-            '<div style="text-align: center; height: auto; min-width: 30vw; border: 1px solid white; border-radius: 10px; padding: 15px; color: white">' +
-            '<img src="/photos/{{ Auth::user()->id }}/thumbnails/' + photoId + '.jpg" class="gallery">' +
-            "<p>Wybierz nowy album dla tego zdjęcia.</p>" +
-            '<form action="/panel/photo/' +
-            photoId +
-            '/changeAlbum" method="POST">' +
-            '@csrf' +
-            '<select name="album" style="width: 300px; margin: 10px; background: none; color: #888; padding: 10px; border: 1px solid white; border-radius: 8px">' +
-            '@foreach($albums as $album)' +
-            '<option value="{{ $album->id }}" {{ ($album->id === $photo->album_id) ? "selected" : "" }}>{{ $album->album_name }}</option>' +
-            '@endforeach' +
-            '</select>' +
-            '<br>' +
-            '<button onclick="hidePrompt()" type="button">ANULUJ</button> <button type="submit">ZAPISZ</button>' +
-            "</form" +
-            "</div>";
-         $(".screen-overlay").append(text).css("display", "flex").animate({
-            opacity: 1,
-         }, "fast");
-      }
-   </script>
 </body>
 
 </html>

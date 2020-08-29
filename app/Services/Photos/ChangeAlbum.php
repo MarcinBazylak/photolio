@@ -12,7 +12,7 @@ class ChangeAlbum
    public function __construct($photoId, $request)
    {
       $album_name = $this->changeAlbum($photoId, $request);
-      $this->alert = 'Zdjęcie zostało przeniesione do albumu ' . $album_name;
+      $this->alert = 'Zdjęcie zostało przeniesione do albumu "' . $album_name . '"';
    }
 
    private function changeAlbum($photoId, $request)
@@ -22,9 +22,8 @@ class ChangeAlbum
 
       $photo = Photo::where('user_id', Auth::user()->id)->find($photoId);
       if (!$photo) abort(403, 'Brak autoryzacji.');
-      $photo->album_id = $album->id;
-      $photo->album_name = $album->album_name;
-      $photo->save();
+      
+      $photo->update(['album_id' => $album->id, 'album_name' => $album->album_name]);
       return $album->album_name;
    }
 }

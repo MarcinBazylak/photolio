@@ -97,7 +97,6 @@
       lightbox.option({
          'albumLabel': ''
       });
-
    </script>
 </body>
 

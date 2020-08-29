@@ -24,9 +24,9 @@ class CreateUserSettingsTable extends Migration
          Możesz w niej umieścić informacje o sobie lub o swoich zainteresowaniach. 
          Możesz ją edytować w ustawieniach.
          ');
-         $table->string('instagram');
-         $table->string('youtube');
-         $table->string('facebook');
+         $table->string('instagram')->nullable();
+         $table->string('youtube')->nullable();
+         $table->string('facebook')->nullable();
          $table->timestamps();
       });
    }
