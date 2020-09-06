@@ -19,6 +19,16 @@ body {
     min-height: 100vh;
 }
 
+span.feedback {
+   display: block;
+   color: orangered;
+   margin-bottom: 8px;
+}
+
+.contact-input-inline {
+   display: flex;
+}
+
 .container {
     flex: 1;
     overflow-x: hidden;
@@ -310,12 +320,13 @@ textarea.contact {
 }
 
 .green {
-    width: 100%;
-    height: auto;
-    padding: 8px;
-    background-color: #afa;
-    color: black;
-    font-weight: 400;
+   width: 100%;
+   height: auto;
+   padding: 8px;
+   background-color: #8f8;
+   color: black;
+   font-weight: 400;
+   border-radius: 8px;
 }
 
 .social-icons-container {
@@ -380,5 +391,9 @@ img.social-icon:hover {
         max-width: 30px;
         max-height: 30px;
         margin-bottom: 10px;
+    }
+
+    .contact-input-inline {
+       display: block;
     }
 }

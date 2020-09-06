@@ -27,6 +27,10 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index');
 
+Route::post('/', 'HomeController@checkUsername');
+
+Route::post('/kontakt', 'EmailController@sendToAdmin');
+
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 //PANEL
@@ -77,12 +81,12 @@ Route::put('/panel/album/{album}/edit', 'AlbumController@update');
 
 // GALLERY
 
-Route::get('/{username}', 'GalleryController@index');
+// Route::get('/{username}', 'GalleryController@index');
 
-Route::get('/{username}/o-mnie', 'GalleryController@aboutMe');
+// Route::get('/{username}/o-mnie', 'GalleryController@aboutMe');
 
-Route::get('/{username}/kontakt', 'GalleryController@contact');
+// Route::get('/{username}/kontakt', 'GalleryController@contact');
 
-Route::post('/{username}/kontakt', 'EmailController@sendToUser');
+// Route::post('/{username}/kontakt', 'EmailController@sendToUser');
 
-Route::get('/{username}/album-{album}', 'GalleryController@album');
+// Route::get('/{username}/album-{album}', 'GalleryController@album');

@@ -6,6 +6,81 @@
    letter-spacing: 2px;
 }
 
+header {
+   background-color: #666;
+   grid-area: header;
+   background-image: url("/../img/top.jpg");
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+
+aside {
+   /* background-color: #888; */
+   grid-area: aside;
+   /* position: absolute;
+   left: -250px; */
+}
+
+aside ul {
+   padding-inline-start: 0;
+   margin: 0;
+}
+
+aside ul li {
+   list-style: none;
+   color: white;
+}
+
+aside ul ul li a {
+   padding-left: 30px;
+   background-color: #777;
+}
+
+aside ul li a {
+   display: block;
+   color: #ddd;
+   text-decoration: none;
+   padding: 10px;
+   background-color: #666;
+   border-bottom: 1px solid #888;
+   padding-left: 15px;
+}
+
+aside a:hover {
+   color: black;
+   background-color: greenyellow;
+}
+
+main {
+   background-color: #aaa;
+   grid-area: main;
+   padding: 1vh;
+}
+
+footer {
+   background-color: #666;
+   grid-area: footer;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   justify-items: center;
+}
+
+.container {
+   display: grid;
+   grid-template-rows: 30vh auto 5vh;
+   grid-template-columns: 250px auto;
+   grid-gap: 2vh;
+   grid-template-areas:
+      "header header"
+      "aside main"
+      "footer footer"
+   ;
+   overflow: hidden;
+}
+
 .feedback {
    display: block;
    color: orangered;
@@ -18,18 +93,18 @@
 }
 
 img.gallery {
-   max-width: 350px;
+   max-width: 300px;
    max-height: 260px;
    transition-duration: 0.5s;
    object-fit: contain;
-   padding: 10px;
+   padding: 5px;
    border: 1px solid #999;
    background-color: white;
    border-radius: 6px;
 }
 
 .gallery-photo {
-   margin: 15px;
+   margin: 6px;
    height: fit-content;
    width: fit-content;
    text-align: center;
@@ -101,7 +176,7 @@ img.photo-icon {
    left: 0;
    width: 100vw;
    height: 100vh;
-   background: rgba(20,20,25, 0.8);
+   background: rgba(20, 20, 25, 0.8);
    display: none;
    opacity: 0;
    justify-content: center;
@@ -118,4 +193,18 @@ input.edit-title {
    border-radius: 8px;
    border: 1px solid white;
    color: white;
+}
+
+.alert {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 100%;
+   height: 50px;
+   background-image: linear-gradient(#FFFFCC, #FFCC66);
+   color: black;
+   font-weight: 100;
+   border: 1px solid #ddaa44;
+   border-radius: 8px;
+   margin: 20px 0;
 }

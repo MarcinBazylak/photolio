@@ -74,11 +74,11 @@
    @endif
 </div>
 
-<div style="width: 1300px; max-width: 96%; margin: auto">
+<div style="max-width: 100%; margin: auto">
    @foreach($albums as $album)
       @if($album->photos()->count() > 0)
          <h3>{{ $album->album_name }}</h3>
-         <div style="display: flex; flex-wrap: wrap; align-items: center">
+         <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center">
             @foreach($album->photos()->orderBy('id', 'desc')->get() as $photo)
                @if($photo->album_id === $album->id)
                   <div class="gallery-photo">
@@ -102,7 +102,6 @@
 </div>
 <div class="screen-overlay"></div>
 
-@endsection
    <script>
       function showEditPrompt(photoId, title) {
          var text =
@@ -151,3 +150,5 @@
          }, "fast");
       }
    </script>
+   
+@endsection

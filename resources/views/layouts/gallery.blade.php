@@ -47,13 +47,13 @@
          <nav id="nav">
             <ul>
                <li class="menu-item">
-                  <a href="http://{{ $user->username }}.{{ Config::get('app.url') }}" id="aboutMeLink">Galeria</a>
+                  <a href="/" id="aboutMeLink">Galeria</a>
                </li>
                <li class="menu-item">
-                  <a href="http://{{ $user->username }}.{{ Config::get('app.url') }}/o-mnie" id="portfolioLink">O mnie</a>
+                  <a href="/o-mnie" id="portfolioLink">O mnie</a>
                </li>
                <li class="menu-item">
-                  <a href="http://{{ $user->username }}.{{ Config::get('app.url') }}/kontakt" id="contactLink">Kontakt</a>
+                  <a href="/kontakt" id="contactLink">Kontakt</a>
                </li>
                @if(Auth::check('verified') && Auth::user()->id === $user->id)
                   <li class="menu-item">
@@ -70,7 +70,7 @@
          </div>
          <div class="my-description">
             <p>
-               {!! nl2br(e($user->settings->welcome_note)) !!}... <a href="http://{{ $user->username }}.{{ Config::get('app.url') }}/o-mnie">więcej</a>
+               {!! nl2br(e($user->settings->welcome_note)) !!}... <a href="/o-mnie">więcej</a>
             </p>
          </div>
          <div class="albums">
@@ -80,9 +80,9 @@
                @endphp
                @if($user->settings->empty_albums || $album->photos()->count() > 0)
                   @if($album->id == $currAlbum)
-                     <a class="on" href="http://{{ $user->username }}.{{ Config::get('app.url') }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
+                     <a class="on" href="/album-{{ $album->id }}">{{ $album->album_name }}</a>
                   @else
-                     <a href="http://{{ $user->username }}.{{ Config::get('app.url') }}/album-{{ $album->id }}">{{ $album->album_name }}</a>
+                     <a href="/album-{{ $album->id }}">{{ $album->album_name }}</a>
                   @endif
                @endif
             @endforeach

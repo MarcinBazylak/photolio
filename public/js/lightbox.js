@@ -45,12 +45,12 @@
     alwaysShowNavOnTouchDevices: false,
     fadeDuration: 600,
     fitImagesInViewport: true,
-    imageFadeDuration: 600,
-    // maxWidth: 800,
-    // maxHeight: 600,
+    imageFadeDuration: 400,
+   //  maxWidth: 1300,
+   //  maxHeight: 800,
     positionFromTop: 50,
     resizeDuration: 700,
-    showImageNumberLabel: true,
+    showImageNumberLabel: false,
     wrapAround: false,
     disableScrolling: false,
     /*
@@ -61,7 +61,7 @@
     If the caption data is user submitted or from some other untrusted source, then set this to true
     to prevent xss and other injection attacks.
      */
-    sanitizeTitle: false
+    sanitizeTitle: true
   };
 
   Lightbox.prototype.option = function(options) {

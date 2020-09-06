@@ -3,10 +3,11 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class fromGallery extends Mailable
+class fromMainPage extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -15,14 +16,16 @@ class fromGallery extends Mailable
      *
      * @return void
      */
-    public $name;
-    public $message;
+   public $name;
+   public $email;
+   public $message;
 
-    public function __construct($name, $message)
-    {
-        $this->name = $name;
-        $this->message = $message;
-    }
+   public function __construct($name, $email, $message)
+   {
+      $this->name = $name;
+      $this->email = $email;
+      $this->message = $message;
+   }
 
     /**
      * Build the message.
@@ -31,6 +34,6 @@ class fromGallery extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.fromGallery');
+        return $this->markdown('mail.fromMainPage');
     }
 }
