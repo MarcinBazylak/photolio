@@ -14,12 +14,16 @@
 
 .navigation-toggle span {
     background-color: #fff;
-    border-radius: 1px 1px 1px 1px;
+    border-radius: 1px;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
     display: block;
     height: 3px;
     width: 40px;
     margin: 10px auto;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    -ms-border-radius: 1px;
+    -o-border-radius: 1px;
 }
 
 #input-toggle {
@@ -32,18 +36,34 @@ nav {
     right: -215px;
     z-index: 9999;
     transition: all 1s ease;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
 }
 
 .menu-item {
     transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
 }
 
 .menu-item-show {
     transform: translateX(-230px);
+    -webkit-transform: translateX(-230px);
+    -moz-transform: translateX(-230px);
+    -ms-transform: translateX(-230px);
+    -o-transform: translateX(-230px);
 }
 
 .menu-item-hidden {
-    transform: translateX(0px);
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
 }
 
 nav ul {

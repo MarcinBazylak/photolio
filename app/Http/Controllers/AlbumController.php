@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Album;
+use App\Photo;
+use Illuminate\Http\Request;
 use App\Services\Albums\CreateAlbum;
 use App\Services\Albums\DeleteAlbum;
 use App\Services\Albums\UpdateAlbum;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AlbumController extends Controller
@@ -22,30 +23,27 @@ class AlbumController extends Controller
       return view('user.albums');
    }
 
+   public function show($albumId)
+   {
+      $album = Album::where('user_id', Auth::user()->id)->find($albumId);
+      $photos = Photo::where('album_id', $albumId)->where('user_id', Auth::user()->id)->get();
+      if ($album) {
+         return view('user.album', compact('photos', 'album'));
+      } else {
+         abort(403, 'Brak autoryzacji!');
+      }
+   }
+
    public function store(Request $request)
    {
       $result = new CreateAlbum($request);
       return redirect('/panel/albums')->with('status', $result->alert);
    }
 
-   public function delete($albumId)
-   {
-      $album = Album::where('user_id', Auth::user()->id)->find($albumId);
-      if (!$album) abort(403, 'Brak autoryzacji.');
-      
-      return view('user.deleteAlbum', compact('album'));
-   }
-
    public function destroy($albumId)
    {
       $result = new DeleteAlbum($albumId);
       return redirect('/panel/albums')->with('status', $result->alert);
-   }
-
-   public function edit($albumId)
-   {
-      $album = Album::where('user_id', Auth::user()->id)->findOrFail($albumId);
-      return view('user.editAlbum', compact('album'));
    }
 
    public function update($albumId, Request $request)

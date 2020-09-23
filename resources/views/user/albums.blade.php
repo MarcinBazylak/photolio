@@ -5,45 +5,71 @@
 @if(Auth::check('verified'))
    <h1>Albumy</h1>
 
-   <form action="/panel/albums" method="post">
-      @csrf
-      <h2>Dodaj nowy album</h2>
-      <div>
-         <label for="album_name">Nazwa albumu</label>
+   @error('albumName')
+      <div class="alert">
+         {{ $message }}
       </div>
-      <div>
-         <input placeholder="Podaj nazwę albumu" type="text" class="form-control @error('album_name') is-invalid @enderror" name="album_name" id="album_name" required autocomplete="off">
-         <span style="display: block; height: 20px" class="invalid-feedback" role="alert">
-            @error('album_name')
-               <strong>{{ $message }}</strong>
-            @enderror
-         </span>
-      </div>
-      <div>
-         <button type="submit">Dodaj</button>
-      </div>
-   </form>
-   <br>
+   @enderror
+
+   <div class="upper-box">
+      <form action="/panel/albums" method="post">
+         @csrf
+         <h2>Dodaj nowy album</h2>
+         <div>
+            <label for="album_name">Nazwa albumu</label>
+         </div>
+         <div>
+            <input placeholder="Podaj nazwę albumu" type="text" class="form-control @error('album_name') is-invalid @enderror" name="album_name" id="album_name" required autocomplete="off">
+            <span class="feedback">
+               @error('album_name')
+                  <strong>{{ $message }}</strong>
+               @enderror
+            </span>
+         </div>
+         <div>
+            <button type="submit" class="form-control">Dodaj</button>
+         </div>
+      </form>
+   </div>
 
    @foreach($albums as $album)
-      <div>
-         <a href="/panel/album/{{ $album->id }}">{{ $album->album_name }}</a>
-         @if($album->id === $user->settings->def_album)
-            (domyślny)
-         @endif
-         {{ $album->photos()->count() }}
+      <div class="albums-list-row">
+         <div>
+            <a href="/panel/album/{{ $album->id }}">{{ $album->album_name }}</a>
+            @if($album->id === $user->settings->def_album)
+               (domyślny)
+            @endif
+         </div>
+         {{ $album->photos()->count() }} zdjęć
          <br>
-         <a href="/panel/album/{{ $album->id }}/edit">zmień nazwę</a>
-         @if($album->photos()->count() === 0 && $user->settings->def_album != $album->id)
-            | <a href="/panel/album/{{ $album->id }}/delete">usuń</a>
-         @endif
+         <button type="button" onclick="showEditAlbumPrompt({{ $album->id }}, '{{ $album->album_name }}')" class="form-control-small">zmień nazwę</button>
+         <button type="button" {{ ($album->photos()->count() !== 0 || $user->settings->def_album === $album->id) ? 'disabled' : '' }} {!! ($album->photos()->count() === 0 && $user->settings->def_album !== $album->id) ? 'onclick="showDelAlbumPrompt(' . $album->id . ', \'' . $album->album_name . '\')"' : '' !!} class="form-control-small">usuń</button>
       </div>
    @endforeach
-
-   <br>
-   {{ Auth::user()->username }}<br>
-   {{ Auth::user()->name }}<br>
-   {{ Auth::user()->email }}<br>
+   <div class="screen-overlay"></div>
 @endif
+<script>
+   function showEditAlbumPrompt(albumId, albumName) {
+      var text =
+         '<div class="popup">' +
+         '<p>Podaj nową nazwę dla albumu "' +
+         albumName +
+         '".</p>' +
+         '<form action="/panel/album/' +
+         albumId +
+         '/edit" method="POST">' +
+         '@method("put")' +
+         '<input class="form-control" type="text" name="albumName" autocomplete="off" value="' +
+         albumName +
+         '" autofocus>' +
+         '@csrf' +
+         "<br>" +
+         '<button onclick="hidePrompt()" type="button" class="form-control-small">ANULUJ</button> <button type="submit" class="form-control-small">ZAPISZ</button>' +
+         "</form></div>";
+      $(".screen-overlay").append(text).css("display", "flex").animate({
+         opacity: 1,
+      }, "fast");
+   }
 
+</script>
 @endsection

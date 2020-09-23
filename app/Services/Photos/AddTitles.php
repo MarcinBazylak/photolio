@@ -15,8 +15,8 @@ class AddTitles
    public function __construct($request)
    {
       $validator = Validator::make($request->all(), [
-         'photo'  => 'required|array|max:10',
-         'title'  => 'required|array|max:10'
+         'photo'  => 'required|array|max:12',
+         'title'  => 'required|array|max:12'
       ]);
 
       if ($validator->fails()) {
@@ -33,12 +33,12 @@ class AddTitles
       for ($i = 0; $i < count($data['photo']); $i++) {
          $photo = Photo::where('user_id', Auth::user()->id)->find($data['photo'][$i]);
          if (!$photo) {
-            abort(403, 'Brak autoryzacji.');
+            abort(403, 'Brak autoryzacji!');
          }
             $photo->title = htmlspecialchars($data['title'][$i]);
             $photo->save();
       }
 
-      $this->alert = 'Tytuły zostały dodane do zdjęć.';
+      $this->alert = 'Tytuły zostały dodane do zdjęć';
    }
 }

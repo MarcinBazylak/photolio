@@ -4,38 +4,28 @@
 
 <h1>Zdjęcia</h1>
 
-@if($errors->any())
-   <div class="alert alert-danger">
-      <ul>
-         @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-         @endforeach
-      </ul>
-   </div>
-@endif
-
-<div style="background: #eee; padding: 10px; border: 1px solid #ccc; border-radius: 8px">
-
+<div class="upper-box">
    @if(empty($result))
       <h2>Dodaj nowe zdjęcia</h2>
       <form action="/panel/photos" enctype="multipart/form-data" method="POST">
          @csrf
          <div>
-            <label for="images">Wybierz zdjęcia z dysku</label>
+            <p>Wybierz zdjęcia z dysku</p>
             <span style="display: block; font-size: 0.7em">Maksymalnie 12 zdjęć. Każde zdjęcie nie większe niż 2 MB</span>
             <div>
-               <input type="file" name="images[]" id="images" multiple accept="image/jpeg">
+               <input class="inputfile @error('images') is-invalid @enderror" type="file" name="images[]" id="images" data-multiple-caption="Wybrano {count} zdjęć" multiple required accept="image/jpeg">
+               <label id="fileLabel" for="images">Kliknij aby wybrać zdjęcia</label>
                <span class="feedback">
-                  @error('images')
-                     <strong>{{ $message }}</strong>
-                  @enderror
+                  @if($errors->has('images.*'))
+                     <strong>{{ $errors->first('images.*') }}</strong>
+                  @endif
                </span>
             </div>
          </div>
          <div>
             <label for="album">Wybierz album dla zdjęć</label>
             <div>
-               <select id="album" class="form-control @error('album') is-invalid @enderror" name="album">
+               <select id="album" class="form-control @error('album') is-invalid @enderror" required name="album">
                   <option disabled selected>Wybierz album</option>
                   @foreach($albums as $album)
                      <option value="{{ $album->id }}">{{ $album->album_name }}</option>
@@ -49,29 +39,42 @@
             </div>
          </div>
          <div>W następnym kroku będziesz miał możliwość dodać tytuł do każdego zdjęcia</div>
-         <button type="submit">Dalej</button>
+         <button type="submit" class="form-control" id="inputFileSubmit">Dalej</button>
       </form>
    @else
       <h2>Dodaj tytuły do nowych zdjęć</h2>
-      <div style="display:flex; flex-wrap: wrap">
-         <form action="/panel/photos" method="post">
+      <form class="form" action="/panel/photos" method="post">
+         <div style="width: 100%; display:flex; flex-wrap: wrap; align-items: center; justify-content: center">
             @method('PUT')
             @csrf
             @for($i = 0; $i < count($result->uploaded); $i++)
-               <div style="display: inline-block">
-                  <div style="display: block">
-                     <img src="/photos/{{ Auth::user()->id }}/thumbnails/{{ $result->uploaded[$i] }}.jpg" style="width: 200px">
+               <div style="display: inline-block; border: 1px solid #bbb; border-radius:6px; margin: 5px; background: #e0e0e0; padding: 5px; box-shadow: 3px 3px 3px rgba(0,0,0,0.3)">
+                  <div style="display: flex; flex-direction: column; align-content: center;align-items: center">
+                     <img src="/photos/{{ Auth::user()->id }}/thumbnails/{{ $result->uploaded[$i] }}.jpg" style="max-width: 200px">
                   </div>
-                  <div style="display: block">
+                  <div style="display: block; margin-top: 10px;">
                      <input type="hidden" name="photo[{{ $i }}]" value="{{ $result->uploaded[$i] }}">
-                     <input type="text" name="title[{{ $i }}]" placeholder="Wpisz tytuł zdjęcia" autocomplete="off">
+                     <input class="form-control-small" style="margin-bottom: 0 !important; width: 100% !important;" type="text" name="title[{{ $i }}]" placeholder="Wpisz tytuł" autocomplete="off">
                   </div>
                </div>
             @endfor
-            <button type="submit">Zapisz</button> <a href="/panel/photos"><button type="button">Pomiń</button></a>
-         </form>
-      </div>
+         </div>
+         <div style="display: block; margin: 10px 5px; width: fit-content">
+            <a href="/panel/photos"><button type="button" class="form-control">Pomiń</button></a> <button type="submit" class="form-control">Zapisz</button>
+         </div>
+      </form>
    @endif
+</div>
+
+<div class="upper-box">
+   <h2>Usuwanie zdjęć</h2>
+   <p>
+      Aby usunąć zdjęcia, kliknij ikone kosza na zdjęciach, które chcesz usunąć, nastepnie kliknij przycisk usuń.
+   </p>
+   <form action="/panel/photos/delete" method="post" id="delete-photos">
+      @csrf
+   </form>
+   <button id="del-button" disabled type="button" onclick="showDelPhotosPrompt()" class="form-control">Usuń</button>
 </div>
 
 <div style="max-width: 100%; margin: auto">
@@ -83,15 +86,18 @@
                @if($photo->album_id === $album->id)
                   <div class="gallery-photo">
                      <a href="/photos/{{ $photo->user_id }}/{{ $photo->id }}.jpg" data-lightbox="{{ $photo->album_name }}" data-title="{{ $photo->title }}">
-                        <img src="/photos/{{ $photo->user_id }}/thumbnails/{{ $photo->id }}.jpg" alt="{{ $photo->title }}" class="gallery">
+                        <img id="photo{{ $photo->id }}" src="/photos/{{ $photo->user_id }}/thumbnails/{{ $photo->id }}.jpg" alt="{{ $photo->title }}" class="gallery">
                         <div class="gallery-photo-overlay">
                            {{ $photo->title }} <br> {{ 'Album: ' . $photo->album_name }}
                         </div>
                      </a>
                      <div class="image-buttons">
-                        <img id="edit-button" class="photo-icon" onclick="showEditPrompt('{{ $photo->id }}','{{ $photo->title }}')" src="/img/edit.png" alt="edytuj tytuł zdjęcia">
-                        <img id="move-button" class="photo-icon" onclick="showMovePrompt('{{ $photo->id }}','{{ $photo->album_id }}')" src="/img/move.png" alt="przenieś do albumu">
-                        <img id="delete-button" class="photo-icon" onclick="showDelPrompt('{{ $photo->user_id }}','{{ $photo->id }}')" src="/img/delete.png" alt="usuń zdjęcie">
+                        <img id="edit-button" class="photo-icon" onclick="showEditPhotoPrompt('{{ $photo->id }}','{{ $photo->title }}')" src="/img/edit.png" alt="edytuj tytuł zdjęcia">
+                        <img id="move-button" class="photo-icon" onclick="showMovePhotoPrompt('{{ $photo->id }}','{{ $photo->album_id }}')" src="/img/move.png" alt="przenieś do albumu">
+                        <label for="del-photo{{ $photo->id }}">
+                           <img id="delete-button" class="photo-icon" src="/img/delete.png" alt="usuń zdjęcie">
+                        </label>
+                        <input style="display: none" class="checkbox" onchange="highlight({{ $photo->id }})" type="checkbox" form="delete-photos" name="del-photo[]" id="del-photo{{ $photo->id }}" value="{{ $photo->id }}">
                      </div>
                   </div>
                @endif
@@ -101,54 +107,4 @@
    @endforeach
 </div>
 <div class="screen-overlay"></div>
-
-   <script>
-      function showEditPrompt(photoId, title) {
-         var text =
-            '<div style="text-align: center; height: auto; min-width: 30vw; border: 1px solid white; border-radius: 10px; padding: 15px; color: white">' +
-            '<img src="/photos/{{ Auth::user()->id }}/thumbnails/' +
-            photoId +
-            '.jpg" class="gallery">' +
-            "<p>Podaj nowy tytuł dla tego zdjęcia.</p>" +
-            '<form action="/panel/photo/' +
-            photoId +
-            '/edit" method="POST">' +
-            '<input class="edit-title" type="text" name="title" autocomplete="off" value="' +
-            title +
-            '" autofocus>' +
-            '@csrf' +
-            '<br>' +
-            '<button onclick="hidePrompt()" type="button">ANULUJ</button> <button type="submit">ZAPISZ</button>' +
-            "</form" +
-            "</div>";
-         $(".screen-overlay").append(text).css("display", "flex").animate({
-            opacity: 1,
-         }, "fast");
-      }
-
-      function showMovePrompt(photoId, albumId) {
-         var text =
-            '<div style="text-align: center; height: auto; min-width: 30vw; border: 1px solid white; border-radius: 10px; padding: 15px; color: white">' +
-            '<img src="/photos/{{ Auth::user()->id }}/thumbnails/' + photoId + '.jpg" class="gallery">' +
-            "<p>Wybierz nowy album dla tego zdjęcia.</p>" +
-            '<form action="/panel/photo/' +
-            photoId +
-            '/changeAlbum" method="POST">' +
-            '@csrf' +
-            '<select name="album" style="width: 300px; margin: 10px; background: none; color: #888; padding: 10px; border: 1px solid white; border-radius: 8px">' +
-            '<option value="" disabled selected>Wybierz Album</option>' +
-            '@foreach($albums as $album)' +
-            '<option value="{{ $album->id }}">{{ $album->album_name }}</option>' +
-            '@endforeach' +
-            '</select>' +
-            '<br>' +
-            '<button onclick="hidePrompt()" type="button">ANULUJ</button> <button type="submit">ZAPISZ</button>' +
-            "</form" +
-            "</div>";
-         $(".screen-overlay").append(text).css("display", "flex").animate({
-            opacity: 1,
-         }, "fast");
-      }
-   </script>
-   
 @endsection

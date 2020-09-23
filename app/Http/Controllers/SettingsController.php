@@ -36,4 +36,5 @@ class SettingsController extends Controller
       $result = new UpdateHeaderImage($request);
       return redirect('/panel')->with('status', $result->alert);
    }
+
 }

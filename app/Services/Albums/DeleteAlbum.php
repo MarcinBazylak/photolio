@@ -15,7 +15,7 @@ class DeleteAlbum
    public function __construct($albumId)
    {
       $album = Album::where('user_id', Auth::user()->id)->find($albumId);
-      if (!$album) abort(403, 'Brak autoryzacji.');
+      if (!$album) abort(403, 'Brak autoryzacji!');
 
       $this->successful = 'Album "' . $album->album_name . '" został usunięty';
       $this->failed = 'Nie można usunąć albumu "' . $album->album_name . '", ponieważ ';
@@ -25,10 +25,10 @@ class DeleteAlbum
    private function delete($album)
    {
       if ($album->photos()->count() != 0) {
-         $this->reason = 'nie jest on pusty.';
+         $this->reason = 'nie jest on pusty';
          return false;
       } elseif($album->user->settings->def_album === $album->id) {
-         $this->reason = 'jest to domyślny album.';
+         $this->reason = 'jest to domyślny album';
          return false;
       } else {
          return $album->delete();

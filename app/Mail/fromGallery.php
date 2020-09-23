@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class fromGallery extends Mailable
+class FromGallery extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,6 +31,6 @@ class fromGallery extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.fromGallery');
+        return $this->markdown('mail.FromGallery');
     }
 }

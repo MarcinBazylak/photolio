@@ -30,22 +30,22 @@ class PhotoController extends Controller
       return view('user.photos', ['result' => $result, 'status' => $result->alert]);
    }
 
-   public function destroy($photoId)
+   public function destroy(Request $request)
    {
-      $result = new DeletePhoto($photoId);
-      return redirect('/panel/photos')->with('status', $result->alert);
+      $result = new DeletePhoto($request);
+      return redirect()->back()->with('status', $result->alert);
    }
 
    public function changeAlbum($photoId, Request $request)
    {
       $result = new ChangeAlbum($photoId, $request);
-      return redirect('/panel/photos')->with('status', $result->alert);
+      return redirect()->back()->with('status', $result->alert);
    }
 
    public function update($photoId, request $request)
    {
       $result = new EditTitle($photoId, $request);
-      return redirect('/panel/photos')->with('status', $result->alert);
+      return redirect()->back()->with('status', $result->alert);
    }
 
    public function addTitles(Request $request)

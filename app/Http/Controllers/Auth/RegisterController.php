@@ -14,6 +14,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\EmailController;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -58,7 +59,7 @@ class RegisterController extends Controller
       // $this->guard()->login($user);
 
       return $this->registered($request, $user)
-         ?: redirect('/' . $user->username);
+         ?: redirect('http://' . $user->username . '.' . config('app.url'));
    }
 
    /**
@@ -75,7 +76,10 @@ class RegisterController extends Controller
          'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
          'password' => ['required', 'string', 'min:8', 'confirmed'],
          'terms-accepted' => ['required', 'integer']
-      ], [], [
+      ], [
+         'username.regex' => 'Nazwa użytkownika może zawierać tylko małe litery oraz cyfry i nie może zaczynać się cyfrą.',
+         'username.unique' => 'Ta nazwa użytkownika jest zajęta.'
+      ], [
          'name' => 'Imię i nazwisko',
          'username' => 'Nazwa użytkownika',
          'email' => 'Adres e-mail',
@@ -134,10 +138,13 @@ class RegisterController extends Controller
 
       $id = $user->id;
       $name = $user->name;
+      $username = $user->username;
 
       $this->addAboutMe($id, $name);
       $this->addFirstAlbum($id);
       $this->createUserFolders($id);
+
+      EmailController::newUserRegistered($id, $username);
 
       return $user;
    }

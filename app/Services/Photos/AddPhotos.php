@@ -22,9 +22,10 @@ class AddPhotos
             'images.*' => 'image|mimes:jpg,jpeg|max:2048'
          ],
          [
-            'images.required' => 'Musisz wybrać zdjęcia z dysku!',
-            'images.max' => 'Możesz przesłać jednorazowo maksymalnie 12 zdjęć!',
-            'album.required' => 'Musisz wybrać album dla zdjęć!'
+            'images.required' => 'Musisz wybrać zdjęcia z dysku',
+            'images.max' => 'Możesz przesłać jednorazowo maksymalnie 12 zdjęć',
+            'album.required' => 'Musisz wybrać album dla zdjęć',
+            'images.*.max' => 'Zdjęcia nie moga być wieksze niż 2MB'
          ],
          [
             'images' => 'Zdjęcia',
@@ -61,7 +62,7 @@ class AddPhotos
             $i++;
             $this->uploaded[] = $lastId;
          endforeach;
-         $this->alert = 'Dodano ' . $i . ' zdjęć.';
+         $this->alert = 'Dodano zdjęcia (' . $i . ')';
       endif;
       return $this->uploaded;
    }
@@ -77,7 +78,7 @@ class AddPhotos
          $photo->save();
          return $photo->id;
       } else {
-         abort(403, 'Brak autoryzacji.');
+         abort(403, 'Brak autoryzacji!');
       }
    }
 }

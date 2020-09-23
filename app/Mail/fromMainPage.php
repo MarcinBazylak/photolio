@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class fromMainPage extends Mailable
+class FromMainPage extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -34,6 +34,6 @@ class fromMainPage extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.fromMainPage');
+        return $this->markdown('mail.FromMainPage');
     }
 }

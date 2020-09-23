@@ -15,7 +15,9 @@ class UpdateHeaderImage
          [
             'image' => 'required|image|mimetypes:image/jpeg|max:3072|dimensions:min_width=1600,min_height=900'
          ],
-         [],
+         [
+            'image.max' => 'Zdjęcie nie może być większe niż 3MB'
+         ],
          [
             'image' => 'Plik'
          ]
@@ -31,7 +33,7 @@ class UpdateHeaderImage
          $constraint->aspectRatio();
       });
       $img->save(public_path('photos/' . Auth::user()->id . '/header/header.jpg'));
-      $this->alert = 'Zdjęcie zostało pomyślnie zapisane.';
+      $this->alert = 'Zdjęcie zostało pomyślnie zapisane';
    }
 }
 

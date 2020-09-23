@@ -31,12 +31,10 @@
             </div>
          </div>
 
-         <div style="margin-top: 10px; margin-bottom: 10px">
+         <label class="checkbox">{{ __('Remember Me') }}
             <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-            <label for="remember">
-               {{ __('Remember Me') }}
-            </label>
-         </div>
+            <span class="checkmark"></span>
+         </label>
 
          <div>
             <button type="submit" class="form-control">
@@ -44,13 +42,13 @@
             </button>
          </div>
 
-         
+
          @if(Route::has('password.request'))
-         <div style="margin-top: 10px; margin-bottom: 10px">
-            <a href="{{ route('password.request') }}">
-               {{ __('Forgot Your Password?') }}
-            </a>
-         </div>
+            <div style="margin-top: 10px; margin-bottom: 10px">
+               <a href="{{ route('password.request') }}">
+                  {{ __('Forgot Your Password?') }}
+               </a>
+            </div>
          @endif
 
       </form>

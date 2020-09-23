@@ -6,6 +6,7 @@ use App\User;
 use App\Mail\fromGallery;
 use App\Mail\fromMainPage;
 use Illuminate\Http\Request;
+use App\Mail\NewUserRegistered;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +44,7 @@ class EmailController extends Controller
       $username = Route::current()->parameter('username');
       $this->user = User::where('username', $username)->firstOrFail();
 
-      $mailable = new fromGallery(request('name'), request('enquiry'));
+      $mailable = new FromGallery(request('name'), request('enquiry'));
       $mailable->replyTo(request('email'), request('name'));
       $mailable->subject(request('name') . ' wysłał Ci wiadomość z Photolio.pl');
 
@@ -77,7 +78,7 @@ class EmailController extends Controller
             ->withInput();
       }
 
-      $mailable = new fromMainPage(request('contact-name'), request('contact-email'), request('enquiry'));
+      $mailable = new FromMainPage(request('contact-name'), request('contact-email'), request('enquiry'));
       $mailable->replyTo(request('contact-email'), request('contact-name'));
       $mailable->subject('Nowa wiadomość od ' . request('contact-name') . ' z serwisu Photolio.pl');
 
@@ -85,5 +86,14 @@ class EmailController extends Controller
 
       $alert = '<div class="green">Twoja wiadomość została wysłana. Dziękujemy.</div>';
       return redirect('/#kontakt')->with('message', $alert);;
+   }
+
+   public static function newUserRegistered($id, $username)
+   {
+      $mailable = new NewUserRegistered($id, $username);
+      $mailable->replyTo('admin@photolio.pl', 'Administracja Photolio.pl');
+      $mailable->subject('Nowy użytkownik zarejestrował się w Photolio.pl');
+
+      Mail::to('admin@photolio.pl')->send($mailable);
    }
 }

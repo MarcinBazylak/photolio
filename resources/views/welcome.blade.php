@@ -2,21 +2,31 @@
 @section('content')
 <section class="section">
    <div class="wrapper">
-      <h1>Photolio.pl</h1>
-      <H2>Szukasz miejsca na swoją fotogalerię?</H2>
-      <p>Wpisz nazwę użytkownika i sprawdź czy jest dostępna</p>
-      <div>
-         <form action="/" method="post" id="checkUserName">
-            @csrf
-            <input type="text" name="username" id="username" class="form-control" placeholder="Twoja nazwa użytkownika" autocomplete="off" required>
-            <button type="submit" class="form-control">Sprawdź</button>
-            <span class="feedback">
-               @error('username')
-                  <strong>{{ $message }}</strong>
-               @enderror
-            </span>
-         </form>
-      </div>
+      <img src="/img/logo.png" alt="logo" class="logo">
+      @guest
+         <H2>Szukasz miejsca na swoją fotogalerię?</H2>
+         <p>Wpisz nazwę użytkownika i sprawdź czy jest dostępna</p>
+         <div>
+            <form action="/" method="post" id="checkUserName">
+               @csrf
+               <input placeholder="dozwolone: małe litery i cyfry" type="text" name="username" id="username" class="form-control" placeholder="Twoja nazwa użytkownika" autocomplete="off" required>
+               <button type="submit" class="form-control">Sprawdź</button>
+               <span class="feedback">
+                  @error('username')
+                     <strong>{{ $message }}</strong>
+                  @enderror
+               </span>
+            </form>
+         </div>
+      @endguest
+      @auth
+         <H2>Aktualnie jesteś zalogowany</H2>
+         <p>To oznacza, że znalazłeś już miejsce na swoją galerię.<br>Z tego miejsca możesz przejść do:</p>
+         <div class="contact-input-inline">
+            <a href="http://{{ Auth::user()->username }}.{{ config('app.url') }}" tabindex="-1"><button type="button" class="form-control main-page" style="margin-right: 15px">swojej galerii</button></a>
+            <a href="/panel" tabindex="-1"><button type="button" class="form-control main-page">panelu</button></a>
+         </div>
+      @endauth
    </div>
 </section>
 

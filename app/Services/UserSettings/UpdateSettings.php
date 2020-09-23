@@ -17,16 +17,17 @@ class UpdateSettings
       
       $request->validate(
          [
-            'username' => 'required|max:191|string|regex:/^[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)*$/|unique:users,username,' . Auth::user()->id,
+            'username' => 'required|max:191|string|regex:/^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$/|unique:users,username,' . Auth::user()->id,
             'name' => 'required|max:191|string',
             'def_album' => 'required',
             'welcome_note' => 'required',
-            'facebook' => 'required|url',
-            'youtube' => 'required|url',
-            'instagram' => 'required|url',
+            'facebook' => 'nullable|url',
+            'youtube' => 'nullable|url',
+            'instagram' => 'nullable|url',
          ],
          [
-            'username.regex' => 'Nazwa użytkownika może składać się jedynie z małych i dużych liter oraz cyfr i musi zaczynać się literą'
+            'username.regex' => 'Nazwa użytkownika może zawierać tylko małe litery oraz cyfry i nie może zaczynać się cyfrą',
+            'username.unique' => 'Ta nazwa użytkownika jest zajęta'
          ],
          [
             'username' => 'Nazwa użytkownika',
@@ -35,8 +36,8 @@ class UpdateSettings
          ]
       );
 
-      $this->successful = 'Ustawienia zostały zapisane!';
-      $this->failed = 'Ustawienia nie zostały zapisane!';
+      $this->successful = 'Ustawienia zostały zapisane';
+      $this->failed = 'Ustawienia nie zostały zapisane';
 
       $this->alert = ($this->updateUserSettings($request) && $this->updateUserDetails(($request))) ? $this->successful : $this->failed;
 

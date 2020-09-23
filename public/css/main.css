@@ -4,6 +4,11 @@
    color: #777;
 }
 
+:focus {
+   outline: none;
+   box-shadow: 0 0 10px greenyellow;
+}
+
 body,
 html {
    overflow: hidden;
@@ -13,8 +18,14 @@ html {
    font-size: 15px;
 }
 
+body {
+   background-color: #3B4371;
+   background: url('/img/front-page.jpg') no-repeat fixed top right / cover;
+}
+
 a {
    color: white;
+   text-decoration: none;
 }
 
 * {
@@ -41,6 +52,11 @@ h2 {
    font-size: 2em;
 }
 
+img.logo {
+   width: 320px;
+   height: 80px;
+}
+
 .green {
    width: 100%;
    height: auto;
@@ -49,6 +65,10 @@ h2 {
    color: black;
    font-weight: 400;
    border-radius: 8px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   -ms-border-radius: 8px;
+   -o-border-radius: 8px;
 }
 
 .wrapper {
@@ -58,58 +78,23 @@ h2 {
    width: 1300px;
    max-width: 96%;
    margin: 0 auto;
-   height: auto;
+   height: fit-content;
    padding-top: 20vh;
 }
 
 .container {
-   scroll-snap-type: y mandatory;
    scroll-behavior: smooth;
-   scroll-snap-stop: always;
    overflow-y: auto;
    overflow-x: hidden;
    height: 100vh;
 }
 
-.top-bar {
-   position: fixed;
-   top: 0;
-   height: fit-content;
-   width: 100%;
-   color: white;
-   border-top: 1px solid #666;
-   border-bottom: 1px solid #666;
-   background: linear-gradient(to bottom, #222, #000) no-repeat center / cover;
-   text-align: end;
-}
-
-.top-bar a {
-   display: inline-block;
-   text-align: center;
-   width: auto;
-   padding: 10px 20px;
-   color: white;
-   text-decoration: none;
-   transition-duration: 0.5s;
-}
-
-.top-bar a:not(:first-child) {
-   border-left: 1px solid #555;
-}
-
-.top-bar a:hover {
-   color: greenyellow;
-}
-
 .section {
    display: block;
    padding-top: 55px !important;
-   height: 100vh;
+   min-height: 100vh;
    width: 100vw;
-   background-color: #3B4371;
-   background: url('/img/front-page.jpg') no-repeat fixed top / cover;
    padding: 1rem;
-   scroll-snap-align: start;
    scroll-behavior: smooth;
    margin: 0;
    z-index: 4;
@@ -126,55 +111,15 @@ span.feedback {
    color: yellow;
 }
 
-.is-invalid {
-   border: 1px solid orangered !important;
-}
-
-.form {
-   width: fit-content;
-   margin: 20px auto;
-}
-
-.form-control {
-   font-family: "Montserrat";
-   font-size: 16px;
-   border: 1px solid greenyellow;
-   border-radius: 4px;
-   padding: 4px 20px 4px 20px;
-   background-color: rgba(0, 0, 0, 0.6);
-   margin: 0;
-   color: greenyellow;
-}
-
-input.form-control {
-   width: 350px;
-   margin-bottom: 10px;
-}
-
-input.form-control:first-of-type {
-   margin-right: 10px;
-}
-
-textarea.form-control {
-   width: 710px;
-   margin-bottom: 5px;
-   min-height: 100px;
-}
-
-button.form-control {
-   cursor: pointer;
-   transition-duration: 0.5s;
-}
-
-.contact-input-inline {
-   display: flex;
-}
-
 @media only screen and (max-width: 760px) {
 
    body,
    html {
       font-size: 13px;
+   }
+
+   body {
+      background: url('/img/front-page-m.jpg') no-repeat fixed top left / cover;
    }
 
    h1 {
@@ -183,7 +128,7 @@ button.form-control {
 
    .section {
       height: auto;
-      min-height: 100vh;
+      min-height: 100%;
       scroll-snap-align: none;
    }
 
@@ -194,7 +139,7 @@ button.form-control {
    .top-bar a {
       text-align: center;
       width: 32%;
-      padding: 10px 0px;
+      padding: 10px 0;
       font-size: 13px;
       letter-spacing: 1px;
    }
@@ -202,25 +147,4 @@ button.form-control {
    .top-bar {
       text-align: center;
    }
-
-   .form {
-      width: 100%;
-   }
-
-   .contact-input-inline {
-      display: block;
-   }
-
-   .form-control {
-      display: block;
-      width: 100% !important;
-      margin: 10px auto !important;
-      font-size: 13px;
-   }
-
-   button.form-control {
-      width: auto !important;
-      margin: initial !important;
-   }
-
 }

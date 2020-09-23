@@ -18,7 +18,7 @@
       </span>
    </div>
    <div>
-      <button type="submit">Zapisz</button> <a href="/panel/albums"><button type="button">Anuluj</button></a>
+      <button type="submit" class="form-control">Zapisz</button> <a href="/panel/albums"><button type="button" class="form-control">Anuluj</button></a>
    </div>
 </form>
 <br>

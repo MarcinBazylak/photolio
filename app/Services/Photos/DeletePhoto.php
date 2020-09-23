@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services\Photos;
 
 use App\Photo;
@@ -9,23 +10,26 @@ class DeletePhoto
 {
    public $alert;
 
-   public function __construct($photoId)
+   public function __construct($request)
    {
-      $this->alert = $this->deleteDbEntry($photoId) ? 'Zdjęcie ' . $photoId . ' zostało pomyslnie usunięte.' : 'Zdjęcie nie zostało usunięte!';
+      $this->deleteFiles($request);
    }
 
    private function deleteDbEntry($photoId)
    {
-      $photo = Photo::where('user_id', Auth::user()->id)->find($photoId);
-      if (!$photo) abort(403, 'Brak autoryzacji.');
-
-      return ($photo->delete()) ? $this->deleteFile($photoId) : false;
+         $photo = Photo::where('user_id', Auth::user()->id)->find($photoId);
+         if (!$photo) abort(403, 'Brak autoryzacji!');
+         $photo->delete();
    }
-   
-   private function deleteFile($photoId)
+
+   private function deleteFiles($data)
    {
-      $photoFile = public_path('photos/' . Auth::user()->id . '/' . $photoId . '.jpg');
-      $thumbFile = public_path('photos/' . Auth::user()->id . '/thumbnails/' . $photoId . '.jpg');
-      return File::delete([$photoFile, $thumbFile]);
+      for ($i = 0; $i < count($data['del-photo']); $i++) {
+         $photoFile = public_path('photos/' . Auth::user()->id . '/' . $data['del-photo'][$i] . '.jpg');
+         $thumbFile = public_path('photos/' . Auth::user()->id . '/thumbnails/' . $data['del-photo'][$i]  . '.jpg');
+         File::delete([$photoFile, $thumbFile]);
+         $this->deleteDbEntry($data['del-photo'][$i]);
+      }
+      $this->alert = 'Usunięto zdjęcia (' . $i . ')';
    }
 }

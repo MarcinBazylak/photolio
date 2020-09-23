@@ -1,0 +1,128 @@
+* {
+   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.navigation-toggle {
+   display: none;
+}
+
+.navigation-toggle span {
+   background-color: #fff;
+   border-radius: 1px 1px 1px 1px;
+   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+   display: block;
+   height: 2px;
+   width: 30px;
+   margin: 8px auto;
+}
+
+#input-toggle {
+   display: none;
+}
+
+nav {
+   position: fixed;
+   top: 0;
+   height: fit-content;
+   width: 100%;
+   color: white;
+   border-top: 1px solid #666;
+   border-bottom: 1px solid #666;
+   background: linear-gradient(to bottom, #222, #000) no-repeat center / cover;
+   text-align: end;
+}
+
+nav ul {
+   list-style-type: none;
+   margin: 0;
+}
+
+nav li {
+   display: inline;
+   margin: 0;
+}
+
+nav a {
+   display: inline-block;
+   text-align: left;
+   width: auto;
+   padding: 10px 20px;
+   color: white;
+   text-decoration: none;
+   transition-duration: 0.2s;
+}
+
+nav a:not(:first-child) {
+   border-left: 1px solid #555;
+}
+
+nav a:hover {
+   color: greenyellow;
+}
+
+img.menu-icon {
+   display: inline-block;
+   position: relative;
+   top: 7px;
+   margin-right: 10px;
+   height: 30px;
+   transition-duration: 0.2s;
+}
+
+nav a:hover > .menu-icon {
+   filter: invert(50%) sepia(87%) saturate(370%) hue-rotate(40deg) brightness(116%) contrast(102%);
+}
+
+@media only screen and (max-width: 760px) {
+
+   .navigation-toggle {
+      display: block;
+      padding: 15px 20px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      z-index: 200;
+   }
+
+   nav {
+      transition: all 0.5s ease;
+      -webkit-transition: all 0.5s ease;
+      -moz-transition: all 0.5s ease;
+      width: 75vw;
+      height: 100vh;
+      right: -75vw;
+      padding-top: 80px;
+      background: linear-gradient(to bottom right, rgba(20, 20, 20, 0.4), rgba(0, 0, 0, 0.5)) no-repeat center / cover;
+      backdrop-filter: blur(8px);
+   }
+
+   nav ul {
+      padding: 0;
+   }
+
+   nav li {
+      display: block;
+   }
+
+   nav a {
+      display: block;
+      width: 100%;
+      padding: 10px 10px;
+      color: white;
+      border-bottom: 1px solid #555;
+      font-size: 1.5em;
+   }
+
+   img.menu-icon {
+      margin-right: 15px;
+   }
+
+   #input-toggle:checked+nav {
+      right: 0;
+      transition: all 0.5s ease;
+      -webkit-transition: all 0.5s ease;
+      -moz-transition: all 0.5s ease;
+   }
+
+}

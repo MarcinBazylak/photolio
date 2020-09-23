@@ -1,25 +1,18 @@
-function showDelPrompt(userId, photoId) {
-   var text =
-      '<div style="text-align: center; height: auto; min-width: 30vw; border: 1px solid white; border-radius: 10px; padding: 15px; color: white">';
-   text +=
-      '<img src="/photos/' +
-      userId +
-      "/thumbnails/" +
-      photoId +
-      '.jpg" class="gallery">';
-   text += "<p>Czy na pewno chcesz usunąć to zdjęcie?</p>";
-   text +=
-      '<button onclick="hidePrompt()" type="button">NIE</button> <a href="/panel/photo/' +
-      photoId +
-      '/delete"><button type="button">TAK</button></a>';
-   text += "</div>";
-
-   $(".screen-overlay").append(text).css("display", "flex").animate(
-      {
-         opacity: 1,
-      },
-      "fast"
-   );
+function highlight(id) {
+   if ($("#del-photo" + id).prop("checked")) {
+      $("#photo" + id).css("backgroundColor", "red");
+   } else {
+      $("#photo" + id).css("backgroundColor", "white");
+   }
+   if ($(".checkbox:checked").length > 0) {
+      $("#del-button")
+         .prop("disabled", false)
+         .text("Usuń " + $(".checkbox:checked").length + " zdjęć");
+   } else {
+      $("#del-button")
+         .prop("disabled", true)
+         .text("Usuń");
+   }
 }
 
 function hidePrompt() {

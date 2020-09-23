@@ -10,7 +10,7 @@
          <div>
             <label for="username">Nazwa użytkownika</label>
             <div>
-               <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') ?? $username ?? '' }}" {{ ($username ?? '') ? 'readonly' : '' }} autocomplete="off" required>
+               <input id="username" type="text" placeholder="dozwolone: małe litery i cyfry" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') ?? $username ?? '' }}" {{ ($username ?? '') ? 'readonly' : '' }} autocomplete="off" required>
                <span class="feedback">
                   @error('username')
                      <strong>{{ $message }}</strong>
@@ -46,7 +46,7 @@
          <div>
             <label for="password">{{ __('Password') }}</label>
             <div>
-               <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" required>
+               <input id="password" type="password" placeholder="min. 8 znaków" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" required>
                <span class="feedback">
                   @error('password')
                      <strong>{{ $message }}</strong>
@@ -58,13 +58,17 @@
          <div>
             <label for="password-confirm">{{ __('Confirm Password') }}</label>
             <div>
-               <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password" required>
+               <input id="password-confirm" type="password" placeholder="min. 8 znaków" class="form-control" name="password_confirmation" autocomplete="new-password" required>
             </div>
          </div>
 
          <div style="margin-top: 10px; margin-bottom: 10px">
-            <input id="terms-accepted" type="checkbox" name="terms-accepted" value="1" required>
-            Potwierdzam, że zapoznałem się z <a href="/regulamin">regulaminem</a> i akceptuję jego warunki.
+
+            <label class="checkbox">Potwierdzam, że zapoznałem się z <a href="/regulamin" style="text-decoration: underline;">regulaminem</a> i akceptuję jego warunki.
+               <input id="terms-accepted" type="checkbox" name="terms-accepted" value="1" required>
+               <span class="checkmark"></span>
+            </label>
+
             <span class="feedback">
                @error('terms-accepted')
                   <strong>Musisz zaakceptować regulamin.</strong>

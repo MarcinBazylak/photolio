@@ -51,7 +51,7 @@ class VerifyEmail extends Notification
             Aby to zrobić, kliknij w poniższy przycisk.
             ')
          ->action('Potwierdź adres', $verificationUrl)
-         ->line('Jeśli nie rejestrowałeś się w serwisie Photolio.pl, zignoruj tęwiadomość.');
+         ->line('Jeśli nie rejestrowałeś się w serwisie Photolio.pl, usuń tę wiadomość.');
    }
 
    /**

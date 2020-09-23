@@ -19,13 +19,13 @@ class UpdateAboutMe
             'about_me' => 'required'
          ],
          [
-            'about_me.required' => 'Opis "O mnie" nie może być pusty.'
+            'about_me.required' => 'Opis "O mnie" nie może być pusty'
          ],
          []
       );
       
-      $this->successful = 'Treść strony "O mnie" została zapisana.';
-      $this->failed = 'Treść strony "O mnie" nie została zapisana.';
+      $this->successful = 'Treść strony "O mnie" została zapisana';
+      $this->failed = 'Treść strony "O mnie" nie została zapisana';
 
       $this->alert = ($this->update($request)) ? $this->successful : $this->failed;
    }
