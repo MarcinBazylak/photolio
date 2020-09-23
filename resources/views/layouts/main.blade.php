@@ -6,6 +6,7 @@
    <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
    <link rel="stylesheet" href="{{ asset('/css/forms.css') }}">
    <link rel="stylesheet" href="{{ asset('/css/main.menu.css') }}">
+   <link rel="shortcut icon" href="{{ asset('/img/icon.ico') }}" type="image/x-icon">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>Photolio.pl - Twoje portfolio fotograficzne</title>

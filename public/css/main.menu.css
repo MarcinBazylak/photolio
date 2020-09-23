@@ -73,7 +73,7 @@ nav a:hover > .menu-icon {
    filter: invert(50%) sepia(87%) saturate(370%) hue-rotate(40deg) brightness(116%) contrast(102%);
 }
 
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 930px) {
 
    .navigation-toggle {
       display: block;
@@ -108,7 +108,7 @@ nav a:hover > .menu-icon {
    nav a {
       display: block;
       width: 100%;
-      padding: 10px 10px;
+      padding: 10px;
       color: white;
       border-bottom: 1px solid #555;
       font-size: 1.5em;
@@ -124,5 +124,14 @@ nav a:hover > .menu-icon {
       -webkit-transition: all 0.5s ease;
       -moz-transition: all 0.5s ease;
    }
+
+}
+
+@media only screen and (orientation: landscape) {
+
+      nav a {
+         padding: 5px 10px;
+         font-size: 1.em;
+      }
 
 }

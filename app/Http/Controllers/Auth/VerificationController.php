@@ -16,7 +16,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 
 class VerificationController extends Controller
 {
-    /*
+   /*
     |--------------------------------------------------------------------------
     | Email Verification Controller
     |--------------------------------------------------------------------------
@@ -27,34 +27,34 @@ class VerificationController extends Controller
     |
     */
 
-    use VerifiesEmails;
+   use VerifiesEmails;
 
-    /**
-     * Where to redirect users after verification.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/verificationSuccessful';
+   /**
+    * Where to redirect users after verification.
+    *
+    * @var string
+    */
+   protected $redirectTo = '/verificationSuccessful';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        Auth::routes(['verify' => true]);
-        $this->middleware('auth')->except('verify');
-        $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
-    }
+   /**
+    * Create a new controller instance.
+    *
+    * @return void
+    */
+   public function __construct()
+   {
+      Auth::routes(['verify' => true]);
+      $this->middleware('auth')->except('verify');
+      $this->middleware('signed')->only('verify');
+      $this->middleware('throttle:6,1')->only('verify', 'resend');
+   }
 
    public function verify(Request $request)
    {
 
-      $user = User::find($request->route('id'));
+      $user = User::findOrFail($request->route('id'));
       Auth::login($user);
-      
+
       if (!hash_equals((string) $request->route('id'), (string) $request->user()->getKey())) {
          throw new AuthorizationException;
       }
@@ -86,5 +86,4 @@ class VerificationController extends Controller
          ? new Response('', 204)
          : redirect($this->redirectPath())->with('verified', true);
    }
-
 }

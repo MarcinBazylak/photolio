@@ -12,7 +12,7 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     
    use Notifiable;
-   protected $fillable = ['name', 'username', 'email', 'password'];
+   protected $fillable = ['name', 'username', 'email', 'password', 'terms_accepted'];
 
    public function sendPasswordResetNotification($token)
    {

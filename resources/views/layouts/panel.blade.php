@@ -49,8 +49,8 @@
                @if(Auth::user()->is_admin)
                   <li><a href="/admin/settings" class="menuBtn">Admin</a></li>
                   <ul>
-                     <li><a href="/admin/settings" class="menuBtn">Ustawienia</a></li>
-                     <li><a href="/admin/users" class="menuBtn">Użytkownicy</a></li>
+                     <li><a href="/admin/settings" class="{{ (request()->path() == 'admin/settings') ? 'active' : '' }} menuBtn">Ustawienia</a></li>
+                     <li><a href="/admin/users" class="{{ (request()->path() == 'admin/users') ? 'active' : '' }} menuBtn">Użytkownicy</a></li>
                   </ul>
                @endif
                @guest
@@ -121,30 +121,6 @@
             title +
             '" autofocus>' +
             '@csrf' +
-            '<br>' +
-            '<button onclick="hidePrompt()" type="button" class="form-control-small">ANULUJ</button> <button type="submit" class="form-control-small">ZAPISZ</button>' +
-            "</form" +
-            "</div>";
-         $(".screen-overlay").append(text).css("display", "flex").animate({
-            opacity: 1,
-         }, "fast");
-      }
-
-      function showMovePhotoPrompt(photoId, albumId) {
-         var text =
-            '<div class="popup">' +
-            '<img src="/photos/{{ Auth::user()->id }}/thumbnails/' + photoId + '.jpg" class="gallery">' +
-            "<p>Wybierz nowy album dla tego zdjęcia.</p>" +
-            '<form action="/panel/photo/' +
-            photoId +
-            '/changeAlbum" method="POST">' +
-            '@csrf' +
-            '<select name="album" class="form-control">' +
-            '<option value="" disabled selected>Wybierz Album</option>' +
-            '@foreach($albums as $album)' +
-            '<option value="{{ $album->id }}">{{ $album->album_name }}</option>' +
-            '@endforeach' +
-            '</select>' +
             '<br>' +
             '<button onclick="hidePrompt()" type="button" class="form-control-small">ANULUJ</button> <button type="submit" class="form-control-small">ZAPISZ</button>' +
             "</form" +
