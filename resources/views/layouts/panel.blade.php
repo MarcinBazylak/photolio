@@ -41,7 +41,7 @@
                      <li><a href="/panel" class="{{ (request()->path() == 'panel') ? 'active' : '' }} menuBtn">Konto</a></li>
                      <li><a href="/panel/about-me" class="{{ (request()->path() == 'panel/about-me') ? 'active' : '' }} menuBtn">O mnie</a></li>
                      <li><a href="/panel/header" class="{{ (request()->path() == 'panel/header') ? 'active' : '' }} menuBtn">Zdjęcie nagłówka</a></li>
-                     <li><a href="/panel/colors" class="{{ (request()->path() == 'panel/colors') ? 'active' : '' }} menuBtn">Kolory</a></li>
+                     {{-- <li><a href="/panel/colors" class="{{ (request()->path() == 'panel/colors') ? 'active' : '' }} menuBtn">Kolory</a></li> --}}
                   </ul>
                   <li><a href="/panel/albums" class="{{ (request()->path() == 'panel/albums') ? 'active' : '' }} menuBtn">Albumy</a></li>
                   <li><a href="/panel/photos" class="{{ (request()->path() == 'panel/photos') ? 'active' : '' }} menuBtn">Zdjęcia</a></li>
@@ -86,51 +86,31 @@
          'albumLabel': ''
       });
 
-   </script>
-   <script>
       $('.menuBtn').click(function () {
          $('#input-toggle').prop('checked', false);
       });
 
-   </script>
-   <script>
-      function showDelPhotosPrompt() {
-         var text =
-            '<div class="popup">' +
-            "<p>Czy na pewno chcesz usunąć " + $(".checkbox:checked").length + " zdjęć?</p>" +
-            '<button onclick="hidePrompt()" type="button" class="form-control-small">ANULUJ</button> <button form="delete-photos" type="submit" class="form-control-small">USUŃ</button>' +
-            "</div>";
-         $(".screen-overlay").append(text).css("display", "flex").animate({
-               opacity: 1,
+      function hidePrompt() {
+         $(".screen-overlay").animate({
+               opacity: 0,
             },
-            "fast"
+            200
          );
+         setTimeout(() => {
+            $(".screen-overlay").empty().css("display", "none");
+         }, 1000);
       }
 
-      function showEditPhotoPrompt(photoId, title) {
-         var text =
-            '<div class="popup">' +
-            '<img src="/photos/{{ Auth::user()->id }}/thumbnails/' +
-            photoId +
-            '.jpg" class="gallery">' +
-            "<p>Podaj nowy tytuł dla tego zdjęcia.</p>" +
-            '<form action="/panel/photo/' +
-            photoId +
-            '/edit" method="POST">' +
-            '<input class="form-control" type="text" name="title" autocomplete="off" value="' +
-            title +
-            '" autofocus>' +
-            '@csrf' +
-            '<br>' +
-            '<button onclick="hidePrompt()" type="button" class="form-control-small">ANULUJ</button> <button type="submit" class="form-control-small">ZAPISZ</button>' +
-            "</form" +
-            "</div>";
-         $(".screen-overlay").append(text).css("display", "flex").animate({
-            opacity: 1,
-         }, "fast");
+      function uncheck() {
+         $('.gallery').css("backgroundColor", "white");
+         $('.checkbox').prop("checked", false);
+         $("#del-button")
+            .prop("disabled", true)
+            .text("Usuń");
       }
 
    </script>
+
 </body>
 
 </html>

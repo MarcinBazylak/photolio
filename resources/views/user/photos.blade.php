@@ -107,4 +107,73 @@
    @endforeach
 </div>
 <div class="screen-overlay"></div>
+<script>
+   function showDelPhotosPrompt() {
+      var text =
+         '<div class="popup">' +
+         "<p>Czy na pewno chcesz usunąć " + $(".checkbox:checked").length + " zdjęć?</p>" +
+         '<button onclick="hidePrompt();uncheck()" type="button" class="form-control-small">ANULUJ</button> <button form="delete-photos" type="submit" class="form-control-small">USUŃ</button>' +
+         "</div>";
+      $(".screen-overlay").append(text).css("display", "flex").animate({
+            opacity: 1,
+         },
+         "fast"
+      );
+   }
+
+   function showEditPhotoPrompt(photoId, title) {
+      var text =
+         '<div class="popup">' +
+         '<img src="/photos/{{ Auth::user()->id }}/thumbnails/' +
+         photoId +
+         '.jpg" class="gallery">' +
+         "<p>Podaj nowy tytuł dla tego zdjęcia.</p>" +
+         '<form action="/panel/photo/' +
+         photoId +
+         '/edit" method="POST">' +
+         '<input class="form-control" type="text" name="title" autocomplete="off" value="' +
+         title +
+         '" autofocus>' +
+         '@csrf' +
+         '<br>' +
+         '<button onclick="hidePrompt()" type="button" class="form-control-small">ANULUJ</button> <button type="submit" class="form-control-small">ZAPISZ</button>' +
+         "</form" +
+         "</div>";
+      $(".screen-overlay").append(text).css("display", "flex").animate({
+         opacity: 1,
+      }, "fast");
+   }
+
+   function showMovePhotoPrompt(photoId, albumId) {
+      var text =
+         '<div class="popup">' +
+         '<img src="/photos/{{ Auth::user()->id }}/thumbnails/' + photoId + '.jpg" class="gallery">' +
+         "<p>Wybierz nowy album dla tego zdjęcia.</p>" +
+         '<form action="/panel/photo/' +
+         photoId +
+         '/changeAlbum" method="POST">' +
+         '@csrf' +
+         '<select id="selectAlbum" name="album" class="form-control" onchange="toggleSaveBtn()">' +
+         '<option value="noselect" disabled selected>Wybierz Album</option>' +
+         '@foreach($albums as $album)' +
+         '<option value="{{ $album->id }}">{{ $album->album_name }}</option>' +
+         '@endforeach' +
+         '</select>' +
+         '<br>' +
+         '<button onclick="hidePrompt()" type="button" class="form-control-small">ANULUJ</button> <button type="submit" id="saveBtn" disabled class="form-control-small">ZAPISZ</button>' +
+         "</form" + "</div>";
+      $(".screen-overlay").append(text).css("display", "flex").animate({
+         opacity: 1,
+      }, "fast");
+   }
+
+   function toggleSaveBtn() {
+      if ($('#seletAlbum').children('option:selected').val() == 'noselect') {
+         $('#saveBtn').prop('disabled', true);
+      } else {
+         $('#saveBtn').prop('disabled', false);
+      }
+   }
+
+</script>
 @endsection

@@ -71,28 +71,5 @@
       }, "fast");
    }
 
-   function showMovePhotoPrompt(photoId, albumId) {
-      var text =
-         '<div class="popup">' +
-         '<img src="/photos/{{ Auth::user()->id }}/thumbnails/' + photoId + '.jpg" class="gallery">' +
-         "<p>Wybierz nowy album dla tego zdjęcia.</p>" +
-         '<form action="/panel/photo/' +
-         photoId +
-         '/changeAlbum" method="POST">' +
-         '@csrf' +
-         '<select name="album" class="form-control">' +
-         '<option value="" disabled selected>Wybierz Album</option>' +
-         '@foreach($albums as $album)' +
-         '<option value="{{ $album->id }}">{{ $album->album_name }}</option>' +
-         '@endforeach' +
-         '</select>' +
-         '<br>' +
-         '<button onclick="hidePrompt()" type="button" class="form-control-small">ANULUJ</button> <button type="submit" class="form-control-small">ZAPISZ</button>' +
-         "</form" + "</div>";
-      $(".screen-overlay").append(text).css("display", "flex").animate({
-         opacity: 1,
-      }, "fast");
-   }
-
 </script>
 @endsection

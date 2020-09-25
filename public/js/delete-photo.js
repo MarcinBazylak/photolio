@@ -14,15 +14,3 @@ function highlight(id) {
          .text("Usuń");
    }
 }
-
-function hidePrompt() {
-   $(".screen-overlay").animate(
-      {
-         opacity: 0,
-      },
-      200
-   );
-   setTimeout(() => {
-      $(".screen-overlay").empty().css("display", "none");
-   }, 1000);
-}
