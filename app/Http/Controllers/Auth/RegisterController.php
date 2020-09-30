@@ -96,7 +96,9 @@ class RegisterController extends Controller
 
    private function addAboutMe($userId, $userName)
    {
-      $aboutMe = new Aboutme(['title' => $userName]);
+      $description = 'To jest opis strony O mnie.
+             Możesz go w każej chwili edytować w ustawieniach swojego konta.';
+      $aboutMe = new Aboutme(['title' => $userName, 'description' => $description]);
       $user = User::find($userId);
       $user->aboutme()->save($aboutMe);
    }
@@ -113,7 +115,10 @@ class RegisterController extends Controller
 
    private function addUserSettings($userId, $defAlbumId)
    {
-      $userSettings = new UserSetting(['def_album' => $defAlbumId]);
+      $welcomeNote = 'To jest wiadomość powitalna Twojej strony. 
+         Możesz w niej zamieścić informacje o sobie lub o swoich zainteresowaniach. 
+         Możesz ją edytować w ustawieniach.';
+      $userSettings = new UserSetting(['def_album' => $defAlbumId, 'welcome_note' => $welcomeNote]);
       $user = User::find($userId);
       $user->settings()->save($userSettings);
    }

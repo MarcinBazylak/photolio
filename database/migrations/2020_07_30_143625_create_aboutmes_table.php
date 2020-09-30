@@ -17,10 +17,7 @@ class CreateAboutmesTable extends Migration
          $table->id();
          $table->foreignId('user_id')->unsigned();
          $table->string('title');
-         $table->text('description')->default('
-            To jest opis strony O mnie. 
-            Możesz go w każej chwili edytować w ustawieniach swojego konta.
-             ');
+         $table->text('description');
          $table->timestamps();
       });
    }

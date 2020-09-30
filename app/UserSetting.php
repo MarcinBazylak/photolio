@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserSetting extends Model
 {
-   protected $fillable = ['def_album'];
+   protected $fillable = ['def_album', 'welcome_note'];
 
    public function user()
    {

@@ -28,13 +28,13 @@ class SettingsController extends Controller
    public function updateAboutMe(Request $request)
    {
       $result = new UpdateAboutMe($request);
-      return redirect('/panel')->with('status', $result->alert);
+      return redirect('/panel/about-me')->with('status', $result->alert);
    }
 
    public function updateHeaderImage(Request $request)
    {
       $result = new UpdateHeaderImage($request);
-      return redirect('/panel')->with('status', $result->alert);
+      return redirect('/panel/header')->with('status', $result->alert);
    }
 
 }

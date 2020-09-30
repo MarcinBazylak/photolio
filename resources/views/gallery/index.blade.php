@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="gallery-container">
+<div class="gallery-container in" id="gallery-container">
    @if(count($photos) > 0)
       @foreach($photos as $photo)
          <div class="gallery-photo">

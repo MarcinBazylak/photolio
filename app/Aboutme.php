@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Aboutme extends Model
 {
-   protected $fillable = ['title'];
+   protected $fillable = ['title', 'description'];
 
    public function user()
    {

@@ -42,7 +42,6 @@
             </button>
          </div>
 
-
          @if(Route::has('password.request'))
             <div style="margin-top: 10px; margin-bottom: 10px">
                <a href="{{ route('password.request') }}">

@@ -19,11 +19,7 @@ class CreateUserSettingsTable extends Migration
          $table->integer('def_album')->nullable();
          $table->string('accent_color')->default('ADFF2F');
          $table->boolean('empty_albums')->default(1);
-         $table->text('welcome_note', 500)->default('
-         To jest wiadomość powitalna Twojej strony. 
-         Możesz w niej umieścić informacje o sobie lub o swoich zainteresowaniach. 
-         Możesz ją edytować w ustawieniach.
-         ');
+         $table->text('welcome_note', 500);
          $table->string('instagram')->nullable();
          $table->string('youtube')->nullable();
          $table->string('facebook')->nullable();

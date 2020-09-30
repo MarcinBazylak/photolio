@@ -9,6 +9,7 @@
    <link rel="stylesheet" href="{{ asset('/css/panel.css') }}">
    <link rel="stylesheet" href="{{ asset('/css/panel.menu.css') }}">
    <link rel="stylesheet" href="{{ asset('/css/panel.forms.css') }}">
+   <link rel="shortcut icon" href="{{ asset('/img/icon.ico') }}" type="image/x-icon">
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -108,6 +109,19 @@
             .prop("disabled", true)
             .text("Usuń");
       }
+
+         function showDelPhotosPrompt() {
+         var text =
+         '<div class="popup">' +
+            "<p>Czy na pewno chcesz usunąć " + $(".checkbox:checked").length + " zdjęć?</p>" +
+            '<button onclick="hidePrompt();uncheck()" type="button" class="form-control-small">ANULUJ</button> <button form="delete-photos" type="submit" class="form-control-small">USUŃ</button>' +
+            "</div>";
+         $(".screen-overlay").append(text).css("display", "flex").animate({
+         opacity: 1,
+         },
+         "fast"
+         );
+         }
 
    </script>
 

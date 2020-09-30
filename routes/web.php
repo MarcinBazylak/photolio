@@ -32,6 +32,10 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', 'HomeController@index');
 
+Route::get('/regulamin', 'HomeController@terms');
+
+Route::get('/polityka-prywatnosci', 'HomeController@privacy');
+
 Route::post('/', 'HomeController@checkUsername');
 
 Route::post('/kontakt', 'EmailController@sendToAdmin');

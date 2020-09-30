@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -20,6 +21,20 @@ class HomeController extends Controller
    public function index()
    {
       return view('welcome');
+   }
+
+   public function privacy()
+   {
+      $policy = DB::table('policies')->where('id', 1)->first();
+
+      return view('privacy', ['privacy' => $policy->privacy]);
+   }
+
+   public function terms()
+   {
+      $policy = DB::table('policies')->where('id', 1)->first();
+
+      return view('terms', ['terms' => $policy->terms]);
    }
 
    public function checkUsername(Request $request)

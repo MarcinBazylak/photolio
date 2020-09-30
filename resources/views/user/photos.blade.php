@@ -11,7 +11,7 @@
          @csrf
          <div>
             <p>Wybierz zdjęcia z dysku</p>
-            <span style="display: block; font-size: 0.7em">Maksymalnie 12 zdjęć. Każde zdjęcie nie większe niż 2 MB</span>
+            <span style="display: block; font-size: 0.7em">Maksymalnie 6 zdjęć. Każde zdjęcie nie większe niż 2 MB</span>
             <div>
                <input class="inputfile @error('images') is-invalid @enderror" type="file" name="images[]" id="images" data-multiple-caption="Wybrano {count} zdjęć" multiple required accept="image/jpeg">
                <label id="fileLabel" for="images">Kliknij aby wybrać zdjęcia</label>
@@ -108,18 +108,7 @@
 </div>
 <div class="screen-overlay"></div>
 <script>
-   function showDelPhotosPrompt() {
-      var text =
-         '<div class="popup">' +
-         "<p>Czy na pewno chcesz usunąć " + $(".checkbox:checked").length + " zdjęć?</p>" +
-         '<button onclick="hidePrompt();uncheck()" type="button" class="form-control-small">ANULUJ</button> <button form="delete-photos" type="submit" class="form-control-small">USUŃ</button>' +
-         "</div>";
-      $(".screen-overlay").append(text).css("display", "flex").animate({
-            opacity: 1,
-         },
-         "fast"
-      );
-   }
+
 
    function showEditPhotoPrompt(photoId, title) {
       var text =

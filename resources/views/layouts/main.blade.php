@@ -11,6 +11,10 @@
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>Photolio.pl - Twoje portfolio fotograficzne</title>
    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+   <script src="/js/cookie.js"></script>
+   <script>
+      CookieAlert.init();
+   </script>
 </head>
 
 <body>

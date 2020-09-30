@@ -18,8 +18,8 @@ class AddPhotos
       $request->validate(
          [
             'album' => 'required',
-            'images'  => 'array|max:12|required',
-            'images.*' => 'image|mimes:jpg,jpeg|max:2048'
+            'images'  => 'array|max:6|required',
+            'images.*' => 'image|mimes:jpg,jpeg|max:2053'
          ],
          [
             'images.required' => 'Musisz wybrać zdjęcia z dysku',

@@ -34,6 +34,6 @@ class FromMainPage extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.FromMainPage');
+        return $this->markdown('mail.fromMainPage');
     }
 }

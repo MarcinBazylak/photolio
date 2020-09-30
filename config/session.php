@@ -155,7 +155,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', '.photolio.pl'),
+    'domain' => env('SESSION_DOMAIN', '.photolio.test'),
 
     /*
     |--------------------------------------------------------------------------

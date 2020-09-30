@@ -5,6 +5,7 @@
    <link rel="stylesheet" href="{{ asset('/css/gallery.style.css') }}">
    <link rel="stylesheet" href="{{ asset('/css/gallery.menu.css') }}">
    <link rel="stylesheet" href="{{ asset('/css/lightbox.css') }}">
+   <link rel="shortcut icon" href="{{ asset('/img/icon.ico') }}" type="image/x-icon">
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -78,13 +79,7 @@
                @php
                   $currAlbum = $currentAlbum->id ?? '';
                @endphp
-               @if($user->settings->empty_albums || $album->photos()->count() > 0)
-                  @if($album->id == $currAlbum)
-                     <a class="on" href="/album-{{ $album->id }}">{{ $album->album_name }}</a>
-                  @else
-                     <a href="/album-{{ $album->id }}">{{ $album->album_name }}</a>
-                  @endif
-               @endif
+                     <a {!! (request()->path() == 'o-mnie' || request()->path() == 'kontakt') ? 'href="album-' . $album->id . '"' : 'onclick="switchAlbum(' . $album->id . ')"' !!} style="cursor: pointer" id="album-btn-{{ $album->id }}" class="album-btn {{ ($album->id == $currAlbum) ? 'on' : '' }}" onclick="switchAlbum({{ $album->id }})">{{ $album->album_name }}</a>
             @endforeach
          </div>
       </header>
@@ -93,6 +88,7 @@
    <footer>Layout and design: Photolio.pl. All photos by: {{ $user->name }}. All rights reserved</footer>
    <script src="{{ asset('/js/menu.js') }}"></script>
    <script src="{{ asset('/js/loading.js') }}"></script>
+   <script src="{{ asset('/js/switchAlbum.js') }}"></script>
    <script>
       lightbox.option({
          'albumLabel': ''

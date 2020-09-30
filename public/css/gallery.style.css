@@ -1,22 +1,23 @@
 @import url("https://fonts.googleapis.com/css?family=KoHo&display=swap");
 
 * {
-    box-sizing: border-box;
-    letter-spacing: 1px;
+   box-sizing: border-box;
+   letter-spacing: 1px;
 }
 
 html {
-    min-height: 100%;
+   min-height: 100%;
 }
 
 body {
-    position: relative;
-    font-family: "KoHo", cursive;
-    font-size: 16px;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+   position: relative;
+   font-family: "KoHo", cursive;
+   font-size: 16px;
+   margin: 0;
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+   overflow-y: scroll;
 }
 
 span.feedback {
@@ -30,339 +31,378 @@ span.feedback {
 }
 
 .container {
-    flex: 1;
-    overflow-x: hidden;
-    position: relative;
+   flex: 1;
+   overflow-x: hidden;
+   position: relative;
 }
 
 @keyframes header {
-    0% {
-        transform: translateY(30px);
-        opacity: 0;
-        -webkit-transform: translateY(30px);
-        -moz-transform: translateY(30px);
-        -ms-transform: translateY(30px);
-        -o-transform: translateY(30px);
-}
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-        -webkit-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -o-transform: translateY(0);
-}
+   0% {
+      transform: translateY(30px);
+      opacity: 0;
+      -webkit-transform: translateY(30px);
+      -moz-transform: translateY(30px);
+      -ms-transform: translateY(30px);
+      -o-transform: translateY(30px);
+   }
+
+   100% {
+      transform: translateY(0);
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -o-transform: translateY(0);
+   }
 }
 
 header h1 {
-    color: white;
-    font-size: 4rem;
-    margin: 50px 0 0 0;
-    font-weight: 100;
-    opacity: 0;
-    text-align: center;
-    animation-name: header;
-    animation-duration: 0.3s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
-    text-shadow: 1px 1px 1px black;
+   color: white;
+   font-size: 4rem;
+   margin: 50px 0 0 0;
+   font-weight: 100;
+   opacity: 0;
+   text-align: center;
+   animation-name: header;
+   animation-duration: 0.3s;
+   animation-timing-function: ease;
+   animation-fill-mode: forwards;
+   text-shadow: 1px 1px 1px black;
 }
 
 @keyframes background {
-    0% {
-        opacity: 0.3;
-    }
-    100% {
-        opacity: 1;
-    }
+   0% {
+      opacity: 0.3;
+   }
+
+   100% {
+      opacity: 1;
+   }
 }
 
 header {
-    opacity: 0.3;
-    width: 98%;
-    height: auto;
-    min-height: 70vh;
-    margin: 1%;
-    background-color: #333;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    justify-items: center;
-    animation-name: background;
-    animation-duration: 1s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
+   opacity: 0.3;
+   width: 98%;
+   height: auto;
+   min-height: 70vh;
+   margin: 1%;
+   background-color: #333;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: flex-end;
+   justify-items: center;
+   animation-name: background;
+   animation-duration: 1s;
+   animation-timing-function: ease;
+   animation-fill-mode: forwards;
 }
 
 header p {
-    font-size: 18px;
-    font-weight: 100;
-    text-align: justify;
-    text-shadow: 1px 1px 1px black;
+   font-size: 18px;
+   font-weight: 100;
+   text-align: justify;
+   text-shadow: 1px 1px 1px black;
 }
 
 header a {
-    color: greenyellow;
-    text-decoration: none;
+   color: greenyellow;
+   text-decoration: none;
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
-    text-align: center;
-    width: 100%;
-    padding: 10px;
+   position: absolute;
+   bottom: 0;
+   text-align: center;
+   width: 100%;
+   padding: 10px;
 }
- 
+
 .my-description {
-    height: 80%;
-    width: 60vw;
-    color: white;
-    text-align: center;
-    font-size: 24px;
-    opacity: 0;
-    animation-name: header;
-    animation-duration: 0.3s;
-    animation-delay: 0.3s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
+   height: 80%;
+   width: 60vw;
+   color: white;
+   text-align: center;
+   font-size: 24px;
+   opacity: 0;
+   animation-name: header;
+   animation-duration: 0.3s;
+   animation-delay: 0.3s;
+   animation-timing-function: ease;
+   animation-fill-mode: forwards;
 }
 
 @keyframes albums {
-    0% {
-        transform: translateY(-20px);
-        opacity: 0;
-        -webkit-transform: translateY(-20px);
-        -moz-transform: translateY(-20px);
-        -ms-transform: translateY(-20px);
-        -o-transform: translateY(-20px);
-}
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-        -webkit-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -o-transform: translateY(0);
-}
+   0% {
+      transform: translateY(-20px);
+      opacity: 0;
+      -webkit-transform: translateY(-20px);
+      -moz-transform: translateY(-20px);
+      -ms-transform: translateY(-20px);
+      -o-transform: translateY(-20px);
+   }
+
+   100% {
+      transform: translateY(0);
+      opacity: 1;
+      -webkit-transform: translateY(0);
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -o-transform: translateY(0);
+   }
 }
 
 .albums {
-    width: 100%;
-    height: 15%;
-    margin-top: 10%;
-    margin-bottom: 40px;
-    text-align: center;
-    opacity: 0;
-    animation-name: albums;
-    animation-duration: 0.3s;
-    animation-delay: 0.8s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
+   width: 100%;
+   height: 15%;
+   margin-top: 10%;
+   margin-bottom: 40px;
+   text-align: center;
+   opacity: 0;
+   animation-name: albums;
+   animation-duration: 0.3s;
+   animation-delay: 0.8s;
+   animation-timing-function: ease;
+   animation-fill-mode: forwards;
 }
 
 .albums a {
-    display: inline-block;
-    color: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    padding: 5px 15px 7px 15px;
-    border-radius: 25px;
-    margin: 10px;
-    font-size: 0.9rem;
-    -webkit-border-radius: 25px;
-    -moz-border-radius: 25px;
-    -ms-border-radius: 25px;
-    -o-border-radius: 25px;
+   transition-duration: 0.5s;
+   display: inline-block;
+   color: rgba(255, 255, 255, 0.9);
+   border: 1px solid rgba(255, 255, 255, 0.6);
+   padding: 5px 15px 7px 15px;
+   border-radius: 25px;
+   margin: 10px;
+   font-size: 0.9rem;
+   -webkit-border-radius: 25px;
+   -moz-border-radius: 25px;
+   -ms-border-radius: 25px;
+   -o-border-radius: 25px;
+   text-shadow: 1px 1px 1px black;
+   box-shadow: 1px 1px 3px black;
+   background-color: rgba(0, 0, 0, 0.2);
 }
 
 .albums a:hover {
-    color: greenyellow;
+   color: greenyellow;
 }
 
 .albums a.on {
-    color: greenyellow;
-    box-shadow: 0 0 10px greenyellow;
+   color: greenyellow;
+   box-shadow: 0 0 10px greenyellow;
 }
 
 img.gallery {
-    max-width: 350px;
-    max-height: 260px;
-    transition-duration: 0.5s;
-    object-fit: contain;
-    padding: 10px;
-    border: 1px solid #999;
-    background-color: white;
-    border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -moz-border-radius: 6px;
-    -ms-border-radius: 6px;
-    -o-border-radius: 6px;
+   max-width: 350px;
+   max-height: 260px;
+   transition-duration: 0.5s;
+   object-fit: contain;
+   padding: 10px;
+   border: 1px solid #999;
+   background-color: white;
+   border-radius: 6px;
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   -ms-border-radius: 6px;
+   -o-border-radius: 6px;
 }
 
-@keyframes gallery {
-    0% {
-        transform: translateY(-40px);
-        opacity: 0;
-        -webkit-transform: translateY(-40px);
-        -moz-transform: translateY(-40px);
-        -ms-transform: translateY(-40px);
-        -o-transform: translateY(-40px);
+@keyframes out {
+   0% {
+      transform: translateY(-80px);
+      opacity: 1;
+      -webkit-transform: translateY(-80px);
+      -moz-transform: translateY(-80px);
+      -ms-transform: translateY(-80px);
+      -o-transform: translateY(-80px);
+   }
+
+   100% {
+      transform: translateY(-40px);
+      opacity: 0;
+      -webkit-transform: translateY(-40px);
+      -moz-transform: translateY(-40px);
+      -ms-transform: translateY(-40px);
+      -o-transform: translateY(-40px);
+   }
 }
-    100% {
-        transform: translateY(-80px);
-        opacity: 1;
-        -webkit-transform: translateY(-80px);
-        -moz-transform: translateY(-80px);
-        -ms-transform: translateY(-80px);
-        -o-transform: translateY(-80px);
+
+.out {
+   animation-name: out;
+   animation-duration: 0.2s;
+   animation-timing-function: ease;
+   animation-fill-mode: forwards;
 }
+
+@keyframes in {
+   0% {
+      transform: translateY(-40px);
+      opacity: 0;
+      -webkit-transform: translateY(-40px);
+      -moz-transform: translateY(-40px);
+      -ms-transform: translateY(-40px);
+      -o-transform: translateY(-40px);
+   }
+
+   100% {
+      transform: translateY(-80px);
+      opacity: 1;
+      -webkit-transform: translateY(-80px);
+      -moz-transform: translateY(-80px);
+      -ms-transform: translateY(-80px);
+      -o-transform: translateY(-80px);
+   }
+}
+
+.in {
+   animation-name: in;
+   animation-duration: 0.2s;
+   animation-delay: 0.5s;
+   animation-timing-function: ease;
+   animation-fill-mode: forwards;
 }
 
 .gallery-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    max-width: 96%;
-    width: 1200px;
-    margin: 40px auto;
-    opacity: 0;
-    animation-name: gallery;
-    animation-duration: 0.3s;
-    animation-delay: 0.5s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   max-width: 96%;
+   width: 1200px;
+   margin: 40px auto;
+   opacity: 0;
 }
 
 .gallery-photo {
-    opacity: 0;
-    margin: 15px;
-    height: fit-content;
-    width: fit-content;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    border-radius: 5px;
-    box-shadow: 3px 3px 8px 3px rgba(0, 0, 0, 0.2);
-    transform: translateY(40px);
-    -webkit-transform: translateY(40px);
-    -moz-transform: translateY(40px);
-    -ms-transform: translateY(40px);
-    -o-transform: translateY(40px);
+   opacity: 0;
+   margin: 15px;
+   height: fit-content;
+   width: fit-content;
+   text-align: center;
+   position: relative;
+   overflow: hidden;
+   border-radius: 5px;
+   box-shadow: 3px 3px 8px 3px rgba(0, 0, 0, 0.2);
+   transform: translateY(40px);
+   -webkit-transform: translateY(40px);
+   -moz-transform: translateY(40px);
+   -ms-transform: translateY(40px);
+   -o-transform: translateY(40px);
 }
 
 @keyframes show {
-    0% {
-        transform: translateY(40px);
-        -webkit-transform: translateY(40px);
-        -moz-transform: translateY(40px);
-        -ms-transform: translateY(40px);
-        -o-transform: translateY(40px);
-        opacity: 0;
-}
-    100% {
-        transform: translateY(0);
-        -webkit-transform: translateY(0);
-        -moz-transform: translateY(0);
-        -ms-transform: translateY(0);
-        -o-transform: translateY(0);
-        opacity: 1;
-}
+   0% {
+      transform: translateY(40px);
+      -webkit-transform: translateY(40px);
+      -moz-transform: translateY(40px);
+      -ms-transform: translateY(40px);
+      -o-transform: translateY(40px);
+      opacity: 0;
+   }
+
+   100% {
+      transform: translateY(0);
+      -webkit-transform: translateY(0);
+      -moz-transform: translateY(0);
+      -ms-transform: translateY(0);
+      -o-transform: translateY(0);
+      opacity: 1;
+   }
 }
 
 .show {
-    animation-name: show;
-    animation-duration: 0.8s;
-    animation-delay: 0.5s;
-    animation-timing-function: ease;
-    animation-fill-mode: forwards;
+   animation-name: show;
+   animation-duration: 0.8s;
+   animation-delay: 0.5s;
+   animation-timing-function: ease;
+   animation-fill-mode: forwards;
 }
 
 .gallery-photo a {
-    letter-spacing: 0;
-    line-height: 0;
-    padding: 0;
-    display: block;
+   letter-spacing: 0;
+   line-height: 0;
+   padding: 0;
+   display: block;
 }
 
 .gallery-photo:hover .gallery-photo-overlay {
-    opacity: 1;
-    bottom: 0;
+   opacity: 1;
+   bottom: 0;
 }
 
 .gallery-photo:hover img.gallery {
-    filter: blur(5px);
+   filter: blur(5px);
 }
 
 .gallery-photo-overlay {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    bottom: -10px;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    width: 100%;
-    height: calc(100% + 20px);
-    color: white;
-    opacity: 0;
-    transition-duration: 0.5s;
-    line-height: normal;
-    padding: 10px;
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   bottom: -10px;
+   left: 0;
+   background-color: rgba(0, 0, 0, 0.7);
+   width: 100%;
+   height: calc(100% + 20px);
+   color: white;
+   opacity: 0;
+   transition-duration: 0.5s;
+   line-height: normal;
+   padding: 10px;
 }
 
 .wrapper {
-    width: 60vw;
-    margin: 100px auto;
+   width: 60vw;
+   margin: 100px auto;
 }
 
 .form {
-    width: fit-content;
-    margin: 20px auto;
+   width: fit-content;
+   margin: 20px auto;
 }
 
 .contact {
-    font-family: "KoHo";
-    font-size: 16px;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 6px 15px 8px 15px;
-    background-color: #f6f6f6;
-    margin: 0;
+   font-family: "KoHo";
+   font-size: 16px;
+   border: 1px solid #333;
+   border-radius: 8px;
+   padding: 6px 15px 8px 15px;
+   background-color: #f6f6f6;
+   margin: 0;
 }
 
 input.contact {
-    width: 300px;
-    margin-bottom: 10px;
+   width: 300px;
+   margin-bottom: 10px;
 }
 
 input.contact:first-of-type {
-    margin-right: 10px;
+   margin-right: 10px;
 }
 
 textarea.contact {
-    width: 610px;
-    margin-bottom: 5px;
-    min-height: 100px;
+   width: 610px;
+   margin-bottom: 5px;
+   min-height: 100px;
 }
 
 #message {
-    padding: 20px;
-    min-height: 65px;
-    text-align: center;
-    font-size: 20px;
-    font-weight: 800;
-    opacity: 0;
-    transition-duration: 1s;
+   padding: 20px;
+   min-height: 65px;
+   text-align: center;
+   font-size: 20px;
+   font-weight: 800;
+   opacity: 0;
+   transition-duration: 1s;
 }
 
 .fade-in {
-    opacity: 1 !important;
+   opacity: 1 !important;
 }
 
 .green {
@@ -376,11 +416,11 @@ textarea.contact {
 }
 
 .social-icons-container {
-    position: absolute;
-    top: 60px;
-    left: 60px;
-    width: fit-content;
-    opacity: 1;
+   position: absolute;
+   top: 60px;
+   left: 60px;
+   width: fit-content;
+   opacity: 1;
 }
 
 img.social-icon {
@@ -401,49 +441,49 @@ img.social-icon:hover {
 }
 
 @media only screen and (max-width: 760px) {
-    .my-description {
-        width: 96%;
-    }
+   .my-description {
+      width: 96%;
+   }
 
-    .my-description p {
-       font-size: 0.6em;
-       text-align: center;
-    }
+   .my-description p {
+      font-size: 0.6em;
+      text-align: center;
+   }
 
-    .wrapper {
-        width: 94%;
-    }
+   .wrapper {
+      width: 94%;
+   }
 
-    .gallery {
-       max-width: 100% !important;
-       padding: 5px !important;
-    }
+   .gallery {
+      max-width: 100% !important;
+      padding: 5px !important;
+   }
 
-    .contact {
-        display: block;
-        width: 300px !important;
-        margin: 10px auto !important;
-    }
+   .contact {
+      display: block;
+      width: 300px !important;
+      margin: 10px auto !important;
+   }
 
-    button.contact {
-        width: auto !important;
-        margin: initial !important;
-    }
+   button.contact {
+      width: auto !important;
+      margin: initial !important;
+   }
 
-    .social-icons-container {
-        top: 15px;
-        left: 15px;
-        display: flex;
-        flex-direction: column;
-    }
+   .social-icons-container {
+      top: 15px;
+      left: 15px;
+      display: flex;
+      flex-direction: column;
+   }
 
-    img.social-icon {
-        max-width: 30px;
-        max-height: 30px;
-        margin-bottom: 10px;
-    }
+   img.social-icon {
+      max-width: 30px;
+      max-height: 30px;
+      margin-bottom: 10px;
+   }
 
-    .contact-input-inline {
-       display: block;
-    }
+   .contact-input-inline {
+      display: block;
+   }
 }
