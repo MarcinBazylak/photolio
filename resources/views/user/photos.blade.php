@@ -7,7 +7,7 @@
 <div class="upper-box">
    @if(empty($result))
       <h2>Dodaj nowe zdjęcia</h2>
-      <form action="/panel/photos" enctype="multipart/form-data" method="POST">
+      <form action="/php/upload.php" enctype="multipart/form-data" method="POST">
          @csrf
          <div>
             <p>Wybierz zdjęcia z dysku</p>
@@ -41,6 +41,49 @@
          <div>W następnym kroku będziesz miał możliwość dodać tytuł do każdego zdjęcia</div>
          <button type="submit" class="form-control" id="inputFileSubmit">Dalej</button>
       </form>
+
+      		<div class="progress">
+      		   <div class="bar"></div>
+      		   <div class="percent">0%</div>
+      		</div>
+      		
+            <div id="status"></div>
+            <script src="/js/upload.js"></script>
+            		<script>
+            		   (function () {
+            		      
+            		      "use strict";
+
+            		      var bar = $('.bar');
+            		      var percent = $('.percent');
+            		      var status = $('#status');
+
+            		      $('form').ajaxForm({
+            		         beforeSend: function () {
+            		            status.empty();
+            		            var percentVal = '0%';
+            		            bar.width(percentVal);
+            		            percent.html(percentVal);
+            		         },
+            		         uploadProgress: function (event, position, total, percentComplete) {
+            		            var percentVal = percentComplete + '%';
+            		            bar.width(percentVal);
+            		            percent.html(percentVal);
+            		         },
+            		         success: function (data, statusText, xhr) {
+            		            var percentVal = '100%';
+            		            bar.width(percentVal);
+            		            percent.html(percentVal);
+            		            status.html(xhr.responseText);
+            		         },
+            		         error: function (xhr, statusText, err) {
+            		            status.html(err || statusText);
+            		         }
+            		      });
+
+            		   })();
+            		</script>
+            
    @else
       <h2>Dodaj tytuły do nowych zdjęć</h2>
       <form class="form" action="/panel/photos" method="post">

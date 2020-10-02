@@ -9,7 +9,7 @@ $(".inputfile").on("change", function (e) {
          );
          $("#inputFileSubmit").prop("disabled", false);
       } else {
-         fileName = '<span style="color:red">Maksymalnie 20 zdjęć</span>';
+         fileName = '<span style="color:red">Maksymalnie 6 zdjęć</span>';
          $("#inputFileSubmit").prop("disabled", true);
       }
    else if (e.target.value)
