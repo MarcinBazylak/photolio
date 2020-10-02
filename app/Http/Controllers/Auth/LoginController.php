@@ -13,7 +13,7 @@ class LoginController extends Controller
 
    protected function authenticated(Request $request, $user)
    {
-      return redirect('/panel');
+      return redirect('/panel/photos');
    }
 
    protected function validateLogin(Request $request)

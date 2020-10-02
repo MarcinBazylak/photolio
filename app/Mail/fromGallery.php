@@ -31,6 +31,6 @@ class FromGallery extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.FromGallery');
+        return $this->markdown('mail.fromGallery');
     }
 }

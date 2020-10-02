@@ -4,6 +4,14 @@
 <head>
    <meta charset="UTF-8">
    <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
+
+   <link rel="canonical" href="https://{{ Config::get('app.url') }}">
+   <meta property="og:url" content="https://{{ Config::get('app.url') }}">
+   <meta property="og:type" content="website">
+   <meta property="og:title" content="photolio.pl - Twoje portfolio fotograficzne">
+   <meta property="og:description" content="Photolio.pl jest doskonałym miejscem aby założyć darmową galerię fotograficzną. Rejestracja jest bardzo prosta i zajmuje dosłownie chwilę.">
+   <meta property="og:image" content="https://photolio.pl/img/og-image.jpg">
+
    <link rel="stylesheet" href="{{ asset('/css/forms.css') }}">
    <link rel="stylesheet" href="{{ asset('/css/main.menu.css') }}">
    <link rel="shortcut icon" href="{{ asset('/img/icon.ico') }}" type="image/x-icon">
@@ -14,6 +22,7 @@
    <script src="/js/cookie.js"></script>
    <script>
       CookieAlert.init();
+
    </script>
 </head>
 
@@ -57,9 +66,10 @@
       @yield('content')
    </div>
    <script>
-      $('.menuBtn').click(function() {
+      $('.menuBtn').click(function () {
          $('#input-toggle').prop('checked', false);
       });
+
    </script>
 </body>
 

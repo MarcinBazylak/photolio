@@ -54,7 +54,7 @@
                   <a href="/o-mnie" id="portfolioLink">O mnie</a>
                </li>
                <li class="menu-item">
-                  <a href="/kontakt" id="contactLink">Kontakt</a>
+                  <a href="/kontakt/#formularz" id="contactLink">Kontakt</a>
                </li>
                @if(Auth::check('verified') && Auth::user()->id === $user->id)
                   <li class="menu-item">

@@ -7,7 +7,7 @@
       {!! session('message') ?? '' !!}
    </div>
 
-   <h2>Napisz do mnie</h2>
+   <h2 id="formularz">Napisz do mnie</h2>
    <form enctype="multipart/form-data" action="http://{{ $user->username }}.{{ Config::get('app.url') }}/kontakt" method="post" id="contactForm"">
 @csrf
       <p style=" text-align: justify">
