@@ -23,7 +23,7 @@ class AddPhotos
          ],
          [
             'images.required' => 'Musisz wybrać zdjęcia z dysku',
-            'images.max' => 'Możesz przesłać jednorazowo maksymalnie 12 zdjęć',
+            'images.max' => 'Możesz przesłać jednorazowo maksymalnie 6 zdjęć',
             'album.required' => 'Musisz wybrać album dla zdjęć',
             'images.*.max' => 'Zdjęcia nie moga być wieksze niż 2MB'
          ],

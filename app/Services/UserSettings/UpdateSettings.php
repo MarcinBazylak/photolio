@@ -31,7 +31,7 @@ class UpdateSettings
          ],
          [
             'username' => 'Nazwa użytkownika',
-            'name' => 'Imię i nazwisko',
+            'name' => 'Imię lub pseudonim',
             'welcome_note' => 'Wiadomość powitalna'
          ]
       );
