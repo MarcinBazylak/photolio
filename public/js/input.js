@@ -2,7 +2,7 @@ $(".inputfile").on("change", function (e) {
    var fileName = "";
 
    if (this.files && this.files.length > 1)
-      if (this.files.length <= 6) {
+      if (this.files.length <= 40) {
          fileName = (this.getAttribute("data-multiple-caption") || "").replace(
             "{count}",
             this.files.length

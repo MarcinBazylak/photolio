@@ -19,7 +19,7 @@
             <label for="album_name">Nazwa albumu</label>
          </div>
          <div>
-            <input placeholder="Podaj nazwę albumu" type="text" class="form-control @error('album_name') is-invalid @enderror" name="album_name" id="album_name" required autocomplete="off">
+            <input placeholder="Podaj nazwę albumu" type="text" class="form-control @error('album_name') is-invalid @enderror" name="album_name" id="album_name" required autofocus autocomplete="off">
             <span class="feedback">
                @error('album_name')
                   <strong>{{ $message }}</strong>
@@ -43,7 +43,7 @@
          {{ $album->photos()->count() }} zdjęć
          <br>
          <button type="button" onclick="showEditAlbumPrompt({{ $album->id }}, '{{ $album->album_name }}')" class="form-control-small">zmień nazwę</button>
-         <button type="button" {{ ($album->photos()->count() !== 0 || $user->settings->def_album === $album->id) ? 'disabled' : '' }} {!! ($album->photos()->count() === 0 && $user->settings->def_album !== $album->id) ? 'onclick="showDelAlbumPrompt(' . $album->id . ', \'' . $album->album_name . '\')"' : '' !!} class="form-control-small">usuń</button>
+         <button type="button" {!! ($user->settings->def_album !== $album->id) ? 'onclick="showDelAlbumPrompt(' . $album->id . ', \'' . $album->album_name . '\')"' : 'disabled' !!} class="form-control-small">usuń</button>
       </div>
    @endforeach
    <div class="screen-overlay"></div>

@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Services\Albums;
 
 use App\Album;
+use PhpParser\Node\Stmt\Foreach_;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class DeleteAlbum
 {
@@ -24,14 +27,22 @@ class DeleteAlbum
 
    private function delete($album)
    {
-      if ($album->photos()->count() != 0) {
-         $this->reason = 'nie jest on pusty';
-         return false;
-      } elseif($album->user->settings->def_album === $album->id) {
+      if ($album->user->settings->def_album === $album->id) {
          $this->reason = 'jest to domyślny album';
          return false;
       } else {
+         foreach ($album->photos()->get() as $photo) {
+            $this->deleteFile($photo->id);
+         }
+         $album->photos()->delete();
          return $album->delete();
       }
+   }
+
+   private function deleteFile($photoId)
+   {
+      $photoFile = public_path('photos/' . Auth::user()->id . '/' . $photoId . '.jpg');
+      $thumbFile = public_path('photos/' . Auth::user()->id . '/thumbnails/' . $photoId  . '.jpg');
+      File::delete([$photoFile, $thumbFile]);
    }
 }

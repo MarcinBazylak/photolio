@@ -10,7 +10,7 @@
          @csrf
          <div>
             <p>Wybierz zdjęcia z dysku</p>
-            <span style="display: block; font-size: 0.7em">Maksymalnie 6 zdjęć. Każde zdjęcie nie większe niż 2 MB</span>
+            <span style="display: block; font-size: 0.7em">Maksymalnie 40 zdjęć. Każde zdjęcie nie większe niż 3 MB</span>
             <div>
                <input class="inputfile @error('images') is-invalid @enderror" type="file" name="images[]" id="images" data-multiple-caption="Wybrano {count} zdjęć" multiple required accept="image/jpeg">
                <label id="fileLabel" for="images">Kliknij aby wybrać zdjęcia</label>

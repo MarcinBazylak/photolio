@@ -18,14 +18,14 @@ class AddPhotos
       $request->validate(
          [
             'album' => 'required',
-            'images'  => 'array|max:6|required',
-            'images.*' => 'image|mimes:jpg,jpeg|max:2053'
+            'images'  => 'array|max:40|required',
+            'images.*' => 'image|mimes:jpg,jpeg|max:3072'
          ],
          [
             'images.required' => 'Musisz wybrać zdjęcia z dysku',
-            'images.max' => 'Możesz przesłać jednorazowo maksymalnie 6 zdjęć',
+            'images.max' => 'Możesz przesłać jednorazowo maksymalnie 40 zdjęć',
             'album.required' => 'Musisz wybrać album dla zdjęć',
-            'images.*.max' => 'Zdjęcia nie moga być wieksze niż 2MB'
+            'images.*.max' => 'Zdjęcia nie moga być wieksze niż 3MB'
          ],
          [
             'images' => 'Zdjęcia',

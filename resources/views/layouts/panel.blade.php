@@ -5,10 +5,10 @@
 <html lang="pl">
 
 <head>
-   <link rel="stylesheet" href="{{ asset('/css/lightbox.css') }}">
-   <link rel="stylesheet" href="{{ asset('/css/panel.css') }}">
-   <link rel="stylesheet" href="{{ asset('/css/panel.menu.css') }}">
-   <link rel="stylesheet" href="{{ asset('/css/panel.forms.css') }}">
+   <link rel="stylesheet" href="{{ asset('/css/lightbox.css') }}?{{ time() }}">
+   <link rel="stylesheet" href="{{ asset('/css/panel.css') }}?{{ time() }}">
+   <link rel="stylesheet" href="{{ asset('/css/panel.menu.css') }}?{{ time() }}">
+   <link rel="stylesheet" href="{{ asset('/css/panel.forms.css') }}?{{ time() }}">
    <link rel="shortcut icon" href="{{ asset('/img/icon.ico') }}" type="image/x-icon">
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">

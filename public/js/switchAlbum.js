@@ -2,7 +2,9 @@ function switchAlbum(albumId) {
    $.ajax({
       type: "GET",
       url: "/php/getAlbum.php?albumId=" + albumId,
-      success: function(data) {
+      success: function (data) {
+         $(window).scrollTop(0);
+
          $(".album-btn").each(function() {
             $(this).removeClass("on");
          });
@@ -16,7 +18,7 @@ function switchAlbum(albumId) {
                .html(data)
                .removeClass("out")
                .addClass("in");
-         }, 200);
+         }, 300);
 
          setTimeout(() => {
             var s = 0.1;
@@ -32,7 +34,7 @@ function switchAlbum(albumId) {
                   s += 0.1;
                }
             });
-         }, 200);
+         }, 300);
       }
    });
    window.history.pushState("", "Photolio.pl", "/album-" + albumId);

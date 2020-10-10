@@ -2,9 +2,9 @@
 <html lang="pl">
 
 <head>
-   <link rel="stylesheet" href="{{ asset('/css/gallery.style.css') }}">
-   <link rel="stylesheet" href="{{ asset('/css/gallery.menu.css') }}">
-   <link rel="stylesheet" href="{{ asset('/css/lightbox.css') }}">
+   <link rel="stylesheet" href="{{ asset('/css/gallery.style.css') }}?{{ time() }}">
+   <link rel="stylesheet" href="{{ asset('/css/gallery.menu.css') }}?{{ time() }}">
+   <link rel="stylesheet" href="{{ asset('/css/lightbox.css') }}?{{ time() }}">
    <link rel="shortcut icon" href="{{ asset('/img/icon.ico') }}" type="image/x-icon">
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +16,7 @@
       header {
          background-image: url("/../photos/{{ $user->id }}/header/header.jpg");
       }
+
    </style>
 </head>
 
@@ -34,10 +35,10 @@
                </a>
             @endif
             @if(!empty($user->settings->youtube))
-            <a href="{{ $user->settings->youtube }}" target="_blank">
-               <img class="social-icon" src="/img/youtube.png" alt="youtube icon">
-            </a>
-         @endif
+               <a href="{{ $user->settings->youtube }}" target="_blank">
+                  <img class="social-icon" src="/img/youtube.png" alt="youtube icon">
+               </a>
+            @endif
          </div>
          <label class="navigation-toggle" id="toggle" for="input-toggle">
             <span></span>
@@ -75,11 +76,13 @@
             </p>
          </div>
          <div class="albums">
+            @php
+               $currAlbum = $currentAlbum->id ?? '';
+            @endphp
             @foreach($albums as $album)
-               @php
-                  $currAlbum = $currentAlbum->id ?? '';
-               @endphp
-                     <a {!! (request()->path() == 'o-mnie' || request()->path() == 'kontakt') ? 'href="album-' . $album->id . '"' : 'onclick="switchAlbum(' . $album->id . ')"' !!} style="cursor: pointer" id="album-btn-{{ $album->id }}" class="album-btn {{ ($album->id == $currAlbum) ? 'on' : '' }}" onclick="switchAlbum({{ $album->id }})">{{ $album->album_name }}</a>
+               @if($user->settings->empty_albums || $album->photos->count() > 0)
+                  <a {!! (request()->path() == 'o-mnie' || request()->path() == 'kontakt') ? 'href="album-' . $album->id . '"' : 'onclick="switchAlbum(' . $album->id . ')"' !!} style="cursor: pointer" id="album-btn-{{ $album->id }}" class="album-btn {{ ($album->id == $currAlbum) ? 'on' : '' }}" onclick="switchAlbum({{ $album->id }})">{{ $album->album_name }}</a>
+               @endif
             @endforeach
          </div>
       </header>
@@ -93,6 +96,7 @@
       lightbox.option({
          'albumLabel': ''
       });
+
    </script>
 </body>
 

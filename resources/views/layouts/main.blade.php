@@ -3,7 +3,9 @@
 
 <head>
    <meta charset="UTF-8">
-   <link rel="stylesheet" href="{{ asset('/css/main.css') }}">
+   <link rel="stylesheet" href="{{ asset('/css/main.css') }}?{{ time() }}">
+      <link rel="stylesheet" href="{{ asset('/css/forms.css') }}?{{ time() }}">
+      <link rel="stylesheet" href="{{ asset('/css/main.menu.css') }}?{{ time() }}">
 
    <link rel="canonical" href="https://{{ Config::get('app.url') }}">
    <meta property="og:url" content="https://{{ Config::get('app.url') }}">
@@ -12,8 +14,6 @@
    <meta property="og:description" content="Photolio.pl jest doskonałym miejscem aby założyć darmową galerię fotograficzną. Rejestracja jest bardzo prosta i zajmuje dosłownie chwilę.">
    <meta property="og:image" content="https://photolio.pl/img/og-image.jpg">
 
-   <link rel="stylesheet" href="{{ asset('/css/forms.css') }}">
-   <link rel="stylesheet" href="{{ asset('/css/main.menu.css') }}">
    <link rel="shortcut icon" href="{{ asset('/img/icon.ico') }}" type="image/x-icon">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
