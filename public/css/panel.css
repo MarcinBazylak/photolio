@@ -279,6 +279,34 @@ input.edit-title {
    -o-border-radius: 8px;
 }
 
+.progressIcon {
+   width: 45px;
+   margin-left: 20px;
+   position: relative;
+   top: 15px;
+   opacity: 0;
+}
+
+@keyframes rotate {
+   0% {
+
+   }
+
+   100% {
+      transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+   }
+}
+
+.rotating {
+   opacity: 1;
+   animation: rotate 1s linear infinite;
+   -webkit-animation: rotate 1s linear infinite;
+}
+
 @media only screen and (max-width: 1300px) {
 
    body,

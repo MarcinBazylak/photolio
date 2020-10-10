@@ -27,7 +27,7 @@ class PhotoController extends Controller
    public function store(Request $request)
    {
       $result = new AddPhotos($request);
-      return view('user.photos', ['result' => $result, 'status' => $result->alert]);
+      return view('user.addTitles', ['result' => $result, 'status' => $result->alert]);
    }
 
    public function destroy(Request $request)

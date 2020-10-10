@@ -5,9 +5,8 @@
 <h1>Zdjęcia</h1>
 
 <div class="upper-box">
-   @if(empty($result))
       <h2>Dodaj nowe zdjęcia</h2>
-      <form action="/php/upload.php" enctype="multipart/form-data" method="POST">
+      <form action="/panel/photos" enctype="multipart/form-data" method="POST">
          @csrf
          <div>
             <p>Wybierz zdjęcia z dysku</p>
@@ -39,7 +38,7 @@
             </div>
          </div>
          <div>W następnym kroku będziesz miał możliwość dodać tytuł do każdego zdjęcia</div>
-         <button type="submit" class="form-control" id="inputFileSubmit">Dalej</button>
+         <button type="submit" class="form-control" id="inputFileSubmit">Dalej</button><img class="progressIcon" src="{{ asset('/img/progress.png') }}" alt="pogress">
       </form>
 
       		<div class="progress">
@@ -56,14 +55,18 @@
 
             		      var bar = $('.bar');
             		      var percent = $('.percent');
-            		      var status = $('#status');
+                        var status = $('#status');
+                        var input = $('#inputFileSubmit');
+                        var progressIcon = $('.progressIcon');
 
             		      $('form').ajaxForm({
             		         beforeSend: function () {
             		            status.empty();
             		            var percentVal = '0%';
             		            bar.width(percentVal);
-            		            percent.html(percentVal);
+                              percent.html(percentVal);
+                              input.prop("disabled", true);
+                              progressIcon.addClass('rotating');
             		         },
             		         uploadProgress: function (event, position, total, percentComplete) {
             		            var percentVal = percentComplete + '%';
@@ -74,39 +77,17 @@
             		            var percentVal = '100%';
             		            bar.width(percentVal);
             		            percent.html(percentVal);
-            		            status.html(xhr.responseText);
+                              status.html(xhr.responseText);
+                              progressIcon.removeClass('rotating');
             		         },
             		         error: function (xhr, statusText, err) {
-            		            status.html(err || statusText);
+                              status.html(err || statusText);
+                              progressIcon.removeClass('rotating');
             		         }
             		      });
 
             		   })();
             		</script>
-            
-   @else
-      <h2>Dodaj tytuły do nowych zdjęć</h2>
-      <form class="form" action="/panel/photos" method="post">
-         <div style="width: 100%; display:flex; flex-wrap: wrap; align-items: center; justify-content: center">
-            @method('PUT')
-            @csrf
-            @for($i = 0; $i < count($result->uploaded); $i++)
-               <div style="display: inline-block; border: 1px solid #bbb; border-radius:6px; margin: 5px; background: #e0e0e0; padding: 5px; box-shadow: 3px 3px 3px rgba(0,0,0,0.3)">
-                  <div style="display: flex; flex-direction: column; align-content: center;align-items: center">
-                     <img src="/photos/{{ Auth::user()->id }}/thumbnails/{{ $result->uploaded[$i] }}.jpg" style="max-width: 200px">
-                  </div>
-                  <div style="display: block; margin-top: 10px;">
-                     <input type="hidden" name="photo[{{ $i }}]" value="{{ $result->uploaded[$i] }}">
-                     <input class="form-control-small" style="margin-bottom: 0 !important; width: 100% !important;" type="text" name="title[{{ $i }}]" placeholder="Wpisz tytuł" autocomplete="off">
-                  </div>
-               </div>
-            @endfor
-         </div>
-         <div style="display: block; margin: 10px 5px; width: fit-content">
-            <a href="/panel/photos"><button type="button" class="form-control">Pomiń</button></a> <button type="submit" class="form-control">Zapisz</button>
-         </div>
-      </form>
-   @endif
 </div>
 
 <div class="upper-box">
