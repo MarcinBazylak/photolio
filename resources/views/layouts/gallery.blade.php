@@ -13,7 +13,7 @@
    <script src="{{ asset('/js/lightbox.js') }}"></script>
    <style>
       header {
-         background-image: url("/../photos/{{ $user->id }}/header/header.jpg");
+         background-image: url("/../photos/{{ $user->id }}/header/header.jpg?{{ time() }}");
       }
    </style>
 </head>
@@ -57,10 +57,10 @@
                </li>
                @if(Auth::check('verified') && Auth::user()->id === $user->id)
                   <li class="menu-item">
-                     <a href="http://{{ Config::get('app.url') }}/panel" class="admin" id="contactLink">Panel</a>
+                     <a href="https://{{ Config::get('app.url') }}/panel" class="admin">Panel</a>
                   </li>
                   <li class="menu-item">
-                     <a href="http://{{ Config::get('app.url') }}/logout" class="admin" id="contactLink">Wyloguj</a>
+                     <a href="https://{{ Config::get('app.url') }}/logout" class="admin">Wyloguj</a>
                   </li>
                @endif
             </ul>

@@ -47,8 +47,6 @@ Route::group(['middleware' => ['admin']], function () {
 
 //PANEL
 
-Route::get('/panel', 'SettingsController@index');
-
 Route::put('/panel/settings', 'SettingsController@updateUserSettings');
 
 Route::put('/panel/aboutme', 'SettingsController@updateAboutMe');

@@ -13,10 +13,10 @@ class UpdateHeaderImage
    {
       $request->validate(
          [
-            'image' => 'required|image|mimetypes:image/jpeg|max:3072|dimensions:min_width=1600,min_height=900'
+            'image' => 'required|image|mimetypes:image/jpeg|max:8192|dimensions:min_width=1600,min_height=900'
          ],
          [
-            'image.max' => 'Zdjęcie nie może być większe niż 3MB'
+            'image.max' => 'Zdjęcie nie może być większe niż 8MB'
          ],
          [
             'image' => 'Plik'
